@@ -11,19 +11,20 @@ namespace spell.Core;
 public class KeywordIntentClassifier : IIntentClassifier
 {
     private readonly Dictionary<string, string> _keywordToIntent = new()
-{
-{"remind", "reminder"},
-{"reminder", "reminder"},
-{"remember", "note"},
-{"note", "note"},
-{"take note", "note"},
-{"timer", "timer"},
-{"in ", "timer"},
-{"for ", "timer"},
-{"convert", "convert"},
-{"to ", "convert"},
-{"how many", "convert"}
-};
+    {
+    {"remind", "reminder"},
+    {"reminder", "reminder"},
+    {"remember", "note"},
+    {"note", "note"},
+    {"take note", "note"},
+    {"timer", "timer"},
+    {"in ", "timer"},
+    {"for ", "timer"},
+    {"convert", "convert"},
+    {"to ", "convert"},
+    {"how many", "convert"}
+    };
+    // TODO: Extend dictionary
 
 
     public IntentResult Classify(string input)

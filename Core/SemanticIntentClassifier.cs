@@ -1,117 +1,164 @@
-﻿using spell.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
-namespace spell.Core;
-
-public class SemanticIntentClassifier : IIntentClassifier
+namespace spell.Core
 {
-    private readonly string[] _vocabulary;
-
-    private readonly Dictionary<string, List<(double[] vec, double norm)>> _intentVectors;
-
-    public double AcceptanceThreshold { get; set; } = 0.5;
-
-    public SemanticIntentClassifier(Dictionary<string, string[]> examples)
+    public class SemanticIntentClassifier : IIntentClassifier
     {
-        if (examples == null) throw new ArgumentNullException(nameof(examples));
+        private readonly Dictionary<string, string[]> _examples;
+        private readonly Dictionary<string, List<double[]>> _intentVectors = new();
+        private readonly List<string> _vocabulary = new();
+        private readonly Dictionary<string, double> _idf = new();
 
-        _vocabulary = BuildVocabulary(examples);
-        _intentVectors = new Dictionary<string, List<(double[] vec, double norm)>>();
+        public double AcceptanceThreshold { get; set; } = 0.45; 
 
-        foreach (var kv in examples)
+        public SemanticIntentClassifier(Dictionary<string, string[]> examples)
         {
-            var list = new List<(double[] vec, double norm)>();
-            foreach (var sample in kv.Value)
-            {
-                var v = Vectorize(sample);
-                var norm = ComputeNorm(v);
-                list.Add((v, norm));
-            }
-            _intentVectors[kv.Key] = list;
+            _examples = examples ?? throw new ArgumentNullException(nameof(examples));
+            BuildVocabulary();
+            ComputeIDF();
+            BuildExampleVectors();
         }
-    }
 
-    public IntentResult Classify(string input)
-    {
-        var inputVec = Vectorize(input);
-        var inputNorm = ComputeNorm(inputVec);
-
-        double bestScore = 0.0;
-        string bestIntent = "unknown";
-
-        foreach (var kv in _intentVectors)
+        public IntentResult Classify(string input)
         {
-            foreach (var ex in kv.Value)
+            if (string.IsNullOrWhiteSpace(input))
+                return new IntentResult { Intent = "unknown", Confidence = 0.0, RawText = input };
+
+            var inputVector = ToVector(input);
+
+            string bestIntent = "unknown";
+            double bestSim = 0.0;
+
+            foreach (var kv in _intentVectors)
             {
-                var score = CosineSimilarityPrecomputed(inputVec, inputNorm, ex.vec, ex.norm);
-                if (score > bestScore)
+                foreach (var vec in kv.Value)
                 {
-                    bestScore = score;
-                    bestIntent = kv.Key;
+                    double sim = CosineSimilarity(inputVector, vec);
+                    if (sim > bestSim)
+                    {
+                        bestSim = sim;
+                        bestIntent = kv.Key;
+                    }
                 }
             }
+
+            if (bestSim < AcceptanceThreshold)
+            {
+                return new IntentResult { Intent = "unknown", Confidence = bestSim, RawText = input };
+            }
+
+            return new IntentResult { Intent = bestIntent, Confidence = bestSim, RawText = input };
         }
 
-        var finalIntent = bestScore >= AcceptanceThreshold ? bestIntent : "unknown";
+        // ------------------------
+        //   INTERNAL FUNCTIONS
+        // ------------------------
 
-        return new IntentResult
+        private void BuildVocabulary()
         {
-            Intent = finalIntent,
-            Confidence = bestScore,
-            RawText = input
-        };
-    }
-
-
-    private string[] BuildVocabulary(Dictionary<string, string[]> examples)
-    {
-        var set = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
-        foreach (var kv in examples)
-        {
-            foreach (var s in kv.Value)
+            var vocabSet = new HashSet<string>();
+            foreach (var group in _examples.Values)
             {
-                var toks = Tokenize(s);
-                foreach (var t in toks) set.Add(t);
+                foreach (var text in group)
+                {
+                    foreach (var word in Tokenize(text))
+                        vocabSet.Add(word);
+                }
+            }
+
+            _vocabulary.Clear();
+            _vocabulary.AddRange(vocabSet.OrderBy(w => w));
+        }
+
+        private void ComputeIDF()
+        {
+            int docCount = _examples.Values.Sum(list => list.Length);
+            var docFreq = new Dictionary<string, int>();
+
+            foreach (var word in _vocabulary)
+                docFreq[word] = 0;
+
+            foreach (var group in _examples.Values)
+            {
+                foreach (var text in group)
+                {
+                    var uniqueWords = Tokenize(text).Distinct();
+                    foreach (var w in uniqueWords)
+                        if (docFreq.ContainsKey(w))
+                            docFreq[w]++;
+                }
+            }
+
+            foreach (var w in _vocabulary)
+            {
+                double df = docFreq[w];
+                _idf[w] = Math.Log((1 + docCount) / (1 + df)) + 1;
             }
         }
-        return set.ToArray();
-    }
 
-    private double[] Vectorize(string text)
-    {
-        var tokens = Tokenize(text);
-        var set = new HashSet<string>(tokens, StringComparer.InvariantCultureIgnoreCase);
-        var vec = new double[_vocabulary.Length];
-        for (int i = 0; i < _vocabulary.Length; i++)
-            vec[i] = set.Contains(_vocabulary[i]) ? 1.0 : 0.0; // binary presence
-        return vec;
-    }
+        private void BuildExampleVectors()
+        {
+            _intentVectors.Clear();
+            foreach (var kv in _examples)
+            {
+                var list = new List<double[]>();
+                foreach (var text in kv.Value)
+                {
+                    var vec = ToVector(text);
+                    list.Add(vec);
+                }
+                _intentVectors[kv.Key] = list;
+            }
+        }
 
-    private static string[] Tokenize(string text)
-    {
-        if (string.IsNullOrWhiteSpace(text)) return Array.Empty<string>();
-        var split = text
-            .ToLowerInvariant()
-            .Split(new[] { ' ', '\t', '\n', '.', ',', '!', '?', ';', ':', '(', ')', '"', '\'' }, StringSplitOptions.RemoveEmptyEntries);
-        return split.Select(s => s.Trim()).Where(s => s.Length > 0).ToArray();
-    }
+        private double[] ToVector(string text)
+        {
+            var tokens = Tokenize(text);
+            var tf = new Dictionary<string, double>();
+            foreach (var w in tokens)
+                tf[w] = tf.GetValueOrDefault(w, 0) + 1;
 
-    private static double ComputeNorm(double[] v)
-    {
-        double s = 0.0;
-        for (int i = 0; i < v.Length; i++) s += v[i] * v[i];
-        return Math.Sqrt(s) + 1e-12; // avoid zero
-    }
+            int n = _vocabulary.Count;
+            double[] vec = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                var word = _vocabulary[i];
+                if (tf.TryGetValue(word, out double f))
+                {
+                    double idf = _idf.GetValueOrDefault(word, 1.0);
+                    vec[i] = (f / tokens.Count) * idf;
+                }
+                else
+                {
+                    vec[i] = 0;
+                }
+            }
+            return vec;
+        }
 
-    private static double CosineSimilarityPrecomputed(double[] a, double normA, double[] b, double normB)
-    {
-        if (a.Length != b.Length) return 0.0;
-        double dot = 0.0;
-        for (int i = 0; i < a.Length; i++) dot += a[i] * b[i];
-        return dot / (normA * normB);
+        private static double CosineSimilarity(double[] a, double[] b)
+        {
+            double dot = 0, magA = 0, magB = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                dot += a[i] * b[i];
+                magA += a[i] * a[i];
+                magB += b[i] * b[i];
+            }
+
+            double denom = Math.Sqrt(magA) * Math.Sqrt(magB);
+            return denom == 0 ? 0 : dot / denom;
+        }
+
+        private static List<string> Tokenize(string text)
+        {
+            text = text.ToLowerInvariant();
+            text = Regex.Replace(text, @"[^a-z0-9\s]", " ");
+            var parts = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            return parts.Where(w => w.Length > 1).ToList(); // мінімум 2 літери
+        }
     }
 }
