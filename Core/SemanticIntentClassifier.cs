@@ -12,7 +12,7 @@ namespace spell.Core
         private readonly List<string> _vocabulary = new();
         private readonly Dictionary<string, double> _idf = new();
 
-        public double AcceptanceThreshold { get; set; } = 0.45; 
+        public double AcceptanceThreshold { get; set; } = 0.55; 
 
         public SemanticIntentClassifier(Dictionary<string, string[]> examples)
         {
@@ -52,11 +52,6 @@ namespace spell.Core
 
             return new IntentResult { Intent = bestIntent, Confidence = bestSim, RawText = input };
         }
-
-        // ------------------------
-        //   INTERNAL FUNCTIONS
-        // ------------------------
-
         private void BuildVocabulary()
         {
             var vocabSet = new HashSet<string>();
@@ -153,12 +148,16 @@ namespace spell.Core
             return denom == 0 ? 0 : dot / denom;
         }
 
+        private static readonly HashSet<string> StopWords = new()
+        {
+            "the", "a", "to", "for", "at", "be", "on", "of", "in", "me", "my", "is", "am", "are"
+        };
         private static List<string> Tokenize(string text)
         {
             text = text.ToLowerInvariant();
             text = Regex.Replace(text, @"[^a-z0-9\s]", " ");
             var parts = text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            return parts.Where(w => w.Length > 1).ToList(); // мінімум 2 літери
+            return parts.Where(w => w.Length > 1 && !StopWords.Contains(w)).ToList();
         }
     }
 }
