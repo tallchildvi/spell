@@ -1,16 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using spell.Core;
+using Microsoft.Recognizers.Text.NumberWithUnit;
+
 
 namespace spell.Modules;
 
-public static class ConverterModule
+
+public  class ConverterModule : IModule
 {
-    public static void Process(string input)
+    public static void Process(IntentResult command)
     {
-        Console.WriteLine($"Conversion request: {input}");
-        // TODO: detect units and perform conversion
+        Console.WriteLine($"[Converter] Intent confidence: {command.Confidence}");
+
+
+        if (command.Entities.TryGetValue("units", out var unitsObj) && unitsObj is IList<Microsoft.Recognizers.Text.ModelResult> units && units.Count > 0)
+        {
+            foreach (var u in units)
+            {
+                Console.WriteLine($"Unit result: type={u.TypeName} text='{u.Text}' resolution={u.Resolution}");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Conversion request (raw): {command.Entities.GetValueOrDefault("text")}");
+        }
     }
+
+
+    void IModule.Process(IntentResult command) => Process(command);
 }

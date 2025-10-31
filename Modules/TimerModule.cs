@@ -1,16 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using spell.Core;
+using Microsoft.Recognizers.Text;
+
 
 namespace spell.Modules;
 
-public static class TimerModule
+
+public class TimerModule : IModule
 {
-    public static void Process(string input)
+    public static void Process(IntentResult command)
     {
-        Console.WriteLine($"Timer started: {input}");
-        // TODO: parse duration, start timer
+        Console.WriteLine($"[Timer] Intent confidence: {command.Confidence}");
+        if (command.Entities.TryGetValue("datetime", out var dtObj) && dtObj is IList<Microsoft.Recognizers.Text.ModelResult> list && list.Count > 0)
+        {
+            foreach (var m in list)
+            {
+                Console.WriteLine($"Found datetime/entity: type={m.TypeName} text='{m.Text}'");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Timer started (raw): {command.Entities.GetValueOrDefault("text")}");
+        }
     }
+
+
+    void IModule.Process(IntentResult command) => Process(command);
 }

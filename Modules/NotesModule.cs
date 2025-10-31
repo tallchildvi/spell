@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using spell.Core;
+
 
 namespace spell.Modules;
 
-public static class NotesModule
+
+public class NotesModule : IModule
 {
-    public static void Process(string input)
+    public static void Process(IntentResult command)
     {
-        Console.WriteLine($"Note saved: {input}");
-        // TODO: save note text to file
+        Console.WriteLine($"[Note] Intent confidence: {command.Confidence}");
+        var text = command.Entities.GetValueOrDefault("text")?.ToString() ?? command.RawText;
+        Console.WriteLine($"Note saved: {text}");
     }
+
+
+    void IModule.Process(IntentResult command) => Process(command);
 }

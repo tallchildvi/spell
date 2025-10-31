@@ -1,7 +1,10 @@
 ﻿using System;
 using spell.Core;
+using spell.Modules;
+
 
 namespace spell;
+
 
 class Program
 {
@@ -13,8 +16,37 @@ class Program
             return 1;
         }
 
+
         var input = string.Join(" ", args);
-        SpellRouter.Handle(input);
+
+
+        var pipeline = new NlpPipeline(new KeywordIntentClassifier(), new RecognizersEntityExtractor());
+        var result = pipeline.Handle(input);
+
+
+        Console.WriteLine($"Detected intent: {result.Intent} (confidence {result.Confidence})\n");
+
+
+        switch (result.Intent)
+        {
+            case "reminder":
+                ReminderModule.Process(result);
+                break;
+            case "note":
+                NotesModule.Process(result);
+                break;
+            case "timer":
+                TimerModule.Process(result);
+                break;
+            case "convert":
+                ConverterModule.Process(result);
+                break;
+            default:
+                Console.WriteLine($"Unknown spell: \"{input}\"");
+                break;
+        }
+
+
         return 0;
     }
 }
