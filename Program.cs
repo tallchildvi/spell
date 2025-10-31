@@ -1,9 +1,10 @@
-﻿using System;
+﻿using spell.Core;
+using spell.Modules;
+using System;
+using System.Collections.Generic;
+using System.CommandLine;
 using System.IO;
 using System.Text.Json;
-using System.Collections.Generic;
-using spell.Core;
-using spell.Modules;
 
 namespace spell
 {
@@ -13,27 +14,92 @@ namespace spell
         {
             if (args.Length == 0)
             {
-                Console.WriteLine("Please provide a command, e.g. spell \"remind me to call mom tomorrow\"");
+                Console.WriteLine("Usage:");
+                Console.WriteLine("  spell cast \"<natural-language-command>\"    Run NLP pipeline");
+                Console.WriteLine("  spell reminder add \"<text>\"                 Add a reminder (CLI mode)");
+                Console.WriteLine("  spell reminder list                           List reminders (CLI mode)");
+                Console.WriteLine("  spell \"<natural-language-command>\"           Shortcut for cast");
                 return 1;
             }
-
-            var input = string.Join(" ", args);
 
             var examples = LoadExamples();
 
             var keywordClassifier = new KeywordIntentClassifier();
-            var semanticClassifier = new SemanticIntentClassifier(examples);
-
-            semanticClassifier.AcceptanceThreshold = 0.55; 
+            var semanticClassifier = new SemanticIntentClassifier(examples)
+            {
+                AcceptanceThreshold = 0.8
+            };
 
             var hybridClassifier = new HybridClassifier(keywordClassifier, semanticClassifier);
-
             var pipeline = new NlpPipeline(hybridClassifier, new RecognizersEntityExtractor());
+
+            var verb = args[0].ToLowerInvariant();
+
+            if (verb == "cast")
+            {
+                if (args.Length < 2)
+                {
+                    Console.WriteLine("Error: cast requires a string argument. Example: spell cast \"remind me to call mom\"");
+                    return 1;
+                }
+
+                var commandText = string.Join(" ", args.Skip(1));
+                return ExecuteNlpCommand(commandText, pipeline);
+            }
+
+            if (verb == "reminder")
+            {
+                if (args.Length >= 2)
+                {
+                    var sub = args[1].ToLowerInvariant();
+                    if (sub == "add")
+                    {
+                        if (args.Length < 3)
+                        {
+                            Console.WriteLine("Error: reminder add requires text: spell reminder add \"Buy milk\"");
+                            return 1;
+                        }
+                        var text = string.Join(" ", args.Skip(2));
+                        var intent = new IntentResult
+                        {
+                            Intent = "reminder",
+                            Confidence = 0.99,
+                            RawText = text,
+                            Entities = new Dictionary<string, object>()
+                        };
+                        intent.Entities["text"] = text;
+                        ReminderModule.Process(intent);
+                        return 0;
+                    }
+                    else if (sub == "list")
+                    {
+                        Console.WriteLine("[Reminder] List not implemented — implement storage to persist reminders.");
+                        return 0;
+                    }
+                    else
+                    {
+                        var rest = string.Join(" ", args.Skip(1));
+                        return ExecuteNlpCommand(rest, pipeline);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Usage: spell reminder add \"text\" | spell reminder list");
+                    return 1;
+                }
+            }
+            var natural = string.Join(" ", args);
+            return ExecuteNlpCommand(natural, pipeline);
+        }
+
+        static int ExecuteNlpCommand(string commandText, NlpPipeline pipeline)
+        {
+            Console.WriteLine($"Processing (NLP): \"{commandText}\"\n");
 
             IntentResult result;
             try
             {
-                result = pipeline.Handle(input);
+                result = pipeline.Handle(commandText);
             }
             catch (Exception ex)
             {
@@ -60,8 +126,8 @@ namespace spell
                         ConverterModule.Process(result);
                         break;
                     default:
-                        Console.WriteLine($"Unknown spell: \"{input}\"");
-                        LogUnlabeled(input, result);
+                        Console.WriteLine($"Unknown spell: \"{commandText}\"");
+                        LogUnlabeled(commandText, result);
                         break;
                 }
             }
@@ -73,6 +139,70 @@ namespace spell
 
             return 0;
         }
+        //static int Main(string[] args)
+        //{
+        //    if (args.Length == 0)
+        //    {
+        //        Console.WriteLine("Please provide a command, e.g. spell \"remind me to call mom tomorrow\"");
+        //        return 1;
+        //    }
+
+        //    var input = string.Join(" ", args);
+
+        //    var examples = LoadExamples();
+
+        //    var keywordClassifier = new KeywordIntentClassifier();
+        //    var semanticClassifier = new SemanticIntentClassifier(examples);
+
+        //    semanticClassifier.AcceptanceThreshold = 0.8; 
+
+        //    var hybridClassifier = new HybridClassifier(keywordClassifier, semanticClassifier);
+
+        //    var pipeline = new NlpPipeline(hybridClassifier, new RecognizersEntityExtractor());
+
+        //    IntentResult result;
+        //    try
+        //    {
+        //        result = pipeline.Handle(input);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error during pipeline handling: {ex.Message}");
+        //        return 2;
+        //    }
+
+        //    Console.WriteLine($"Detected intent: {result.Intent} (confidence {result.Confidence})\n");
+
+        //    try
+        //    {
+        //        switch (result.Intent)
+        //        {
+        //            case "reminder":
+        //                ReminderModule.Process(result);
+        //                break;
+        //            case "note":
+        //                NotesModule.Process(result);
+        //                break;
+        //            case "timer":
+        //                TimerModule.Process(result);
+        //                break;
+        //            case "convert":
+        //                ConverterModule.Process(result);
+        //                break;
+        //            default:
+        //                Console.WriteLine($"Unknown spell: \"{input}\"");
+        //                LogUnlabeled(input, result);
+        //                break;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine($"Error while executing module: {ex.Message}");
+        //        return 3;
+        //    }
+
+        //    return 0;
+        //}
 
         private static Dictionary<string, string[]> LoadExamples()
         {
