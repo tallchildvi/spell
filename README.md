@@ -1,11 +1,92 @@
-# spell — Command-Line Assistant
+# 🪄 spell — Command-Line Assistant
 
-**spell** is a lightweight, extensible command-line utility designed to simplify everyday tasks.  
-Currently, it includes a reminder system, with future plans to expand into a general-purpose task assistant.
+**spell** — a lightweight, modular CLI utility for performing tasks in natural language.
 
-## Features
+It supports reminders, timers, unit conversion, and note-taking.
 
-- Add and list reminders directly from your terminal  
-- Simple command structure (`spell reminder add "..."`)  
-- Extensible architecture — easily add new commands in the future  
-- Built on top of [System.CommandLine](https://github.com/dotnet/command-line-api)
+Under the hood — a hybrid NLP system combining Keyword Matching, TF-IDF, and Cosine Similarity, working entirely offline without any internet connection.
+
+---
+
+## Quick Start
+
+### Build and Run
+
+```bash
+dotnet build
+dotnet run spell cast "remind me to call mom tomorrow"
+```
+
+---
+
+## ⚙️ Commands
+
+All commands start with the word **spell**.
+
+Then comes the subcommand **cast**, followed by a natural language description of the action.
+
+```bash
+spell cast "set a timer for 10 minutes"
+spell cast "convert 10 kilometers to miles"
+spell cast "take a note: project deadline next week"
+```
+
+---
+
+## 🧩 Architecture
+
+```
++------------------------+
+|        CLI Core        |
++------------------------+
+          |
+          v
++-------------------------------+
+|  NLP Pipeline                 |
+|  - KeywordIntentClassifier    |
+|  - SemanticIntentClassifier   |
+|  - HybridClassifier           |
+|  - RecognizersEntityExtractor |
++-------------------------------+
+          |
+          v
++------------------------+
+|     Modules Layer      |
+|  - ReminderModule      |
+|  - TimerModule         |
+|  - NotesModule         |
+|  - ConverterModule     |
++------------------------+
+```
+
+---
+
+## 🧠 Core Components
+
+- **HybridClassifier** — combines keyword and semantic analysis for more accurate intent detection.
+- **NlpPipeline** — processes input commands and routes results to the appropriate module.
+- **Modules** — perform specific actions (reminders, timers, notes, conversions).
+
+---
+
+## 🗂️ Project Structure
+
+```
+spell/
+│
+├── Core/
+|   ├── examples.json
+│   ├── NlpPipeline.cs
+│   ├── HybridClassifier.cs
+│   ├── KeywordIntentClassifier.cs
+│   ├── SemanticIntentClassifier.cs
+│   └── RecognizersEntityExtractor.cs
+│
+├── Modules/
+│   ├── ReminderModule.cs
+│   ├── TimerModule.cs
+│   ├── NotesModule.cs
+│   └── ConverterModule.cs
+│
+└── Program.cs
+```
