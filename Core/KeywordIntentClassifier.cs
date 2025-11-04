@@ -38,6 +38,7 @@ public class KeywordIntentClassifier : IIntentClassifier
             if (lower.Contains(kv.Key))
                 scores[kv.Value] = scores.GetValueOrDefault(kv.Value, 0) + 1;
         }
+        // TODO: change parsing logic
 
 
         if (!scores.Any())
