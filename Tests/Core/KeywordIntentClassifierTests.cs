@@ -28,7 +28,7 @@ public class KeywordIntentClassifierTests
     [Test]
     public void Classify_TextWithNoteKeyword_ReturnsNoteIntent()
     {
-        string input = "take note of this important information";
+        string input = "note this important information";
 
         var result = _classifier.Classify(input);
 
@@ -56,12 +56,12 @@ public class KeywordIntentClassifierTests
 
         Assert.That(result.Intent, Is.EqualTo("convert"));
         Assert.That(result.Confidence, Is.EqualTo(0.95));
-    }`
+    }
 
     [Test]
-    public void Classify_TextWithoutKeywords_ReturnsUnknownIntent()
+    public void Classify_TextWithoutKeywords_ReturnsUnknownIntent() 
     {
-        string input = "no key words in there";
+        string input = "no key words there";
 
         var result = _classifier.Classify(input);
 

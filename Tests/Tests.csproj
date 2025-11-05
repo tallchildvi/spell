@@ -17,11 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\spell\spell.csproj" />
+    <Using Include="NUnit.Framework" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="NUnit.Framework" />
+    <ProjectReference Include="..\spell\spell.csproj" />
   </ItemGroup>
 
 </Project>
