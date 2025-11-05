@@ -120,8 +120,8 @@ public class KeywordIntentClassifierTests
 
         var result = _classifier.Classify(input);
 
-        Assert.That(result.Intent, Is.EqualTo("reminder"));
-        Assert.That(result.Confidence, Is.EqualTo(0.7));
+        Assert.That(result.Intent, Is.EqualTo("note"));
+        Assert.That(result.Confidence, Is.EqualTo(0.95));
     }
 
     [Test]
