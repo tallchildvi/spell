@@ -69,7 +69,7 @@ Unit conversion is a key feature for handling various types of data (distance, w
 
 ---
 
-## Edge Cases
+## Corner Cases
 
 ### 5. `Classify_TextWithoutKeywords_ReturnsUnknownIntent`
 
