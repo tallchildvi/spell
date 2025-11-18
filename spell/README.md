@@ -59,34 +59,5 @@ spell cast "take a note: project deadline next week"
 +------------------------+
 ```
 
----
+## 🗂️ Documentation
 
-## 🧠 Core Components
-
-- **HybridClassifier** — combines keyword and semantic analysis for more accurate intent detection.
-- **NlpPipeline** — processes input commands and routes results to the appropriate module.
-- **Modules** — perform specific actions (reminders, timers, notes, conversions).
-
----
-
-## 🗂️ Project Structure
-
-```
-spell/
-│
-├── Core/
-|   ├── examples.json
-│   ├── NlpPipeline.cs
-│   ├── HybridClassifier.cs
-│   ├── KeywordIntentClassifier.cs
-│   ├── SemanticIntentClassifier.cs
-│   └── RecognizersEntityExtractor.cs
-│
-├── Modules/
-│   ├── ReminderModule.cs
-│   ├── TimerModule.cs
-│   ├── NotesModule.cs
-│   └── ConverterModule.cs
-│
-└── Program.cs
-```
