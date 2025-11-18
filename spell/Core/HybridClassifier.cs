@@ -26,7 +26,6 @@ public class HybridClassifier : IIntentClassifier
 
         if (string.IsNullOrEmpty(res.Intent) || res.Intent == "unknown" || res.Confidence < PrimaryConfidenceThreshold)
         {
-            Console.WriteLine("using fallback");
             var fb = _fallback.Classify(input);
 
             if (fb != null && fb.Intent != "unknown" && fb.Confidence > res.Confidence)
