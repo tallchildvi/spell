@@ -1,4 +1,9 @@
-﻿using System;
+﻿/// <file>
+/// <summary>
+/// KeywordIntentClassifier.cs - Keyword-based intent classifier implementation
+/// </summary>
+/// </file> 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +12,19 @@ using System.Threading.Tasks;
 
 namespace spell.Core;
 
-
+/// <summary>
+/// Keyword-based intent classifier using string matching
+/// </summary>
+/// <remarks>
+/// This classifier uses a predefined dictionary of keywords to identify intents.
+/// It's fast but limited to exact keyword matches. Works well for unambiguous
+/// commands with clear trigger words.
+/// </remarks>
 public class KeywordIntentClassifier : IIntentClassifier
 {
+    /// <summary>
+    /// Dictionary mapping keywords to intent names
+    /// </summary>
     private readonly Dictionary<string, string> _keywordToIntent = new()
     {
     {"remind", "reminder"},
@@ -26,7 +41,23 @@ public class KeywordIntentClassifier : IIntentClassifier
     };
     // TODO: Extend dictionary
 
-
+    /// <summary>
+    /// Classifies input text by matching keywords
+    /// </summary>
+    /// <param name="input">Natural language text to classify</param>
+    /// <returns>IntentResult with matched intent and confidence score</returns>
+    /// <exception cref="ArgumentNullException">Not thrown, handles null gracefully</exception>
+    /// <example>
+    /// <code>
+    /// var classifier = new KeywordIntentClassifier();
+    /// var result = classifier.Classify("remind me to call");
+    /// // result.Intent == "reminder"
+    /// // result.Confidence between 0.4 and 0.95
+    /// </code>
+    /// </example>
+    /// <remarks>
+    /// Confidence calculation: 0.4 base + 0.3 * keyword_count, capped at 0.95
+    /// </remarks>
     public IntentResult Classify(string input)
     {
         var lower = input.ToLowerInvariant();
