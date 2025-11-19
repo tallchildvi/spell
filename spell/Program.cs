@@ -1,6 +1,7 @@
 ﻿/// <file>
 /// <summary>
 /// Program.cs - Main entry point for spell CLI assistant application
+/// test deploy
 /// </summary>
 /// </file>
 using spell.Core;
