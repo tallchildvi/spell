@@ -1,0 +1,64 @@
+\doxysection{spell.\+Core.\+IEntity\+Extractor Interface Reference}
+\hypertarget{interfacespell_1_1_core_1_1_i_entity_extractor}{}\label{interfacespell_1_1_core_1_1_i_entity_extractor}\index{spell.Core.IEntityExtractor@{spell.Core.IEntityExtractor}}
+
+
+Interface for entity extraction components in the NLP pipeline.  
+
+
+Inheritance diagram for spell.\+Core.\+IEntity\+Extractor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacespell_1_1_core_1_1_i_entity_extractor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor_ab1a05979b6408b64ec8cca91ddfbc4c2}{Extract}} (string input, \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Extracts entities from input text and populates the \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for entity extraction components in the NLP pipeline. 
+
+Implementations extract structured entities (dates, numbers, units) from text and populate them into the \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}\textquotesingle{}s Entities dictionary. 
+
+\label{doc-func-members}
+\Hypertarget{interfacespell_1_1_core_1_1_i_entity_extractor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacespell_1_1_core_1_1_i_entity_extractor_ab1a05979b6408b64ec8cca91ddfbc4c2}\index{spell.Core.IEntityExtractor@{spell.Core.IEntityExtractor}!Extract@{Extract}}
+\index{Extract@{Extract}!spell.Core.IEntityExtractor@{spell.Core.IEntityExtractor}}
+\doxysubsubsection{\texorpdfstring{Extract()}{Extract()}}
+{\footnotesize\ttfamily \label{interfacespell_1_1_core_1_1_i_entity_extractor_ab1a05979b6408b64ec8cca91ddfbc4c2} 
+void spell.\+Core.\+IEntity\+Extractor.\+Extract (\begin{DoxyParamCaption}\item[{string}]{input}{, }\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Extracts entities from input text and populates the \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language text to extract entities from\\
+\hline
+{\em result} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} to populate with extracted entities\\
+\hline
+\end{DoxyParams}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult\ \{\ RawText\ =\ \textcolor{stringliteral}{"{}remind\ me\ in\ 5\ minutes"{}}\ \};}
+\DoxyCodeLine{IEntityExtractor\ extractor\ =\ \textcolor{keyword}{new}\ RecognizersEntityExtractor();}
+\DoxyCodeLine{extractor.Extract(\textcolor{stringliteral}{"{}remind\ me\ in\ 5\ minutes"{}},\ result);}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}datetime"{}]\ contains\ parsed\ time\ information}}
+
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classspell_1_1_core_1_1_recognizers_entity_extractor_af49e12a8ac40d57946610879a12b736b}{spell.\+Core.\+Recognizers\+Entity\+Extractor}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_i_entity_extractor_8cs}{IEntity\+Extractor.\+cs}}\end{DoxyCompactItemize}

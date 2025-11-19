@@ -1,0 +1,108 @@
+\doxysection{spell.\+Modules.\+Reminder\+Module Class Reference}
+\hypertarget{classspell_1_1_modules_1_1_reminder_module}{}\label{classspell_1_1_modules_1_1_reminder_module}\index{spell.Modules.ReminderModule@{spell.Modules.ReminderModule}}
+
+
+Module for processing reminder creation requests.  
+
+
+Inheritance diagram for spell.\+Modules.\+Reminder\+Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_modules_1_1_reminder_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classspell_1_1_modules_1_1_reminder_module_a331fe12a2da44e2d26fc2a52560c9b9c}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Processes reminder intent by extracting datetime and text information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void IModule. \mbox{\hyperlink{classspell_1_1_modules_1_1_reminder_module_a1a0b1ddb2d45e7da97659c744375e798}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Explicit interface implementation that delegates to static Process method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module for processing reminder creation requests. 
+
+Extracts datetime entities and reminder text from natural language. Handles commands like "{}remind me to call mom tomorrow"{}, "{}set a reminder for 8am"{}, "{}reminder to buy milk"{}. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_modules_1_1_reminder_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_modules_1_1_reminder_module_a1a0b1ddb2d45e7da97659c744375e798}\index{spell.Modules.ReminderModule@{spell.Modules.ReminderModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.ReminderModule@{spell.Modules.ReminderModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_reminder_module_a1a0b1ddb2d45e7da97659c744375e798} 
+void IModule. spell.\+Modules.\+Reminder\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Explicit interface implementation that delegates to static Process method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} to process\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+\Hypertarget{classspell_1_1_modules_1_1_reminder_module_a331fe12a2da44e2d26fc2a52560c9b9c}\index{spell.Modules.ReminderModule@{spell.Modules.ReminderModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.ReminderModule@{spell.Modules.ReminderModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_reminder_module_a331fe12a2da44e2d26fc2a52560c9b9c} 
+void spell.\+Modules.\+Reminder\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Processes reminder intent by extracting datetime and text information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing reminder request and extracted entities\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May throw during entity access or console output\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ Intent\ =\ \textcolor{stringliteral}{"{}reminder"{}},}
+\DoxyCodeLine{\ \ \ \ Confidence\ =\ 0.88,}
+\DoxyCodeLine{\ \ \ \ Entities\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}datetime"{}}]\ =\ recognizedDateTime,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}text"{}}]\ =\ \textcolor{stringliteral}{"{}call\ mom"{}}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{ReminderModule.Process(result);}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ Reminder\ datetime\ text:\ tomorrow}}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ Parsed\ datetime:\ 2024-\/01-\/16T00:00:00}}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ Reminder\ text:\ call\ mom}}
+
+\end{DoxyCode}
+ 
+
+Displays\+:
+\begin{DoxyItemize}
+\item Datetime text as recognized in input (e.\+g., "{}tomorrow"{}, "{}5 minutes"{})
+\item Parsed datetime value(s) from resolution
+\item Reminder text content 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Modules/\mbox{\hyperlink{_reminder_module_8cs}{Reminder\+Module.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,281 @@
+\doxysection{spell.\+Program Class Reference}
+\hypertarget{classspell_1_1_program}{}\label{classspell_1_1_program}\index{spell.Program@{spell.Program}}
+
+
+Main program class containing entry point and CLI configuration.  
+
+
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static async Task$<$ int $>$ \mbox{\hyperlink{classspell_1_1_program_a260ffa0a8e4a7d903e1793d7cc8a31a9}{Main}} (string\mbox{[}$\,$\mbox{]} args)
+\begin{DoxyCompactList}\small\item\em Asynchronous entry point of the application. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classspell_1_1_program_adbdd27ac546506edc4dee08c573e1406}{Execute\+Nlp\+Command}} (string command\+Text, \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}} pipeline)
+\begin{DoxyCompactList}\small\item\em Executes natural language command processing through NLP pipeline. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}} \mbox{\hyperlink{classspell_1_1_program_adfbb9dde88213fe846ce4fb9a98a757b}{Build\+Pipeline}} (Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ examples)
+\begin{DoxyCompactList}\small\item\em Builds NLP pipeline with classifiers and entity extractor. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classspell_1_1_program_a34406ca7c959bddff8c9d09c79442f4e}{Print\+Usage}} ()
+\begin{DoxyCompactList}\small\item\em Prints CLI usage information. \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classspell_1_1_program_afa85a28253be75d6080d8ea773cd9c76}{Load\+Examples}} ()
+\begin{DoxyCompactList}\small\item\em Loads training examples from JSON file or uses built-\/in ones. \end{DoxyCompactList}\item 
+static Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classspell_1_1_program_ac140d4e329d12eef69f5ee06175e2468}{Get\+Builtin\+Examples}} ()
+\begin{DoxyCompactList}\small\item\em Returns built-\/in examples for each intent type. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classspell_1_1_program_a57b0366f31e2036e3a8f0e357318519c}{Log\+Unlabeled}} (string input, \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} res)
+\begin{DoxyCompactList}\small\item\em Logs unrecognized commands to unlabeled.\+log file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main program class containing entry point and CLI configuration. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_program_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_program_adfbb9dde88213fe846ce4fb9a98a757b}\index{spell.Program@{spell.Program}!BuildPipeline@{BuildPipeline}}
+\index{BuildPipeline@{BuildPipeline}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{BuildPipeline()}{BuildPipeline()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_adfbb9dde88213fe846ce4fb9a98a757b} 
+\mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}} spell.\+Program.\+Build\+Pipeline (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$}]{examples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Builds NLP pipeline with classifiers and entity extractor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em examples} & Dictionary of examples for training semantic classifier\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configured \doxylink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline} with hybrid classifier
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & May throw if examples is null\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ examples\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string[]>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [\textcolor{stringliteral}{"{}reminder"{}}]\ =\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}remind\ me\ to..."{}},\ \textcolor{stringliteral}{"{}set\ reminder..."{}}\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{var\ pipeline\ =\ \mbox{\hyperlink{classspell_1_1_program_adfbb9dde88213fe846ce4fb9a98a757b}{BuildPipeline}}(examples);}
+\DoxyCodeLine{var\ result\ =\ pipeline.Handle(\textcolor{stringliteral}{"{}remind\ me\ to\ call"{}});}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_adbdd27ac546506edc4dee08c573e1406}\index{spell.Program@{spell.Program}!ExecuteNlpCommand@{ExecuteNlpCommand}}
+\index{ExecuteNlpCommand@{ExecuteNlpCommand}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{ExecuteNlpCommand()}{ExecuteNlpCommand()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_adbdd27ac546506edc4dee08c573e1406} 
+int spell.\+Program.\+Execute\+Nlp\+Command (\begin{DoxyParamCaption}\item[{string}]{command\+Text}{, }\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}}}]{pipeline}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Executes natural language command processing through NLP pipeline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command\+Text} & Natural language command text\\
+\hline
+{\em pipeline} & Configured NLP pipeline for processing\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Exit code (0 -\/ success, 2 -\/ pipeline error, 3 -\/ module error)
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Exceptions are handled internally and converted to error codes\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ pipeline\ =\ \mbox{\hyperlink{classspell_1_1_program_adfbb9dde88213fe846ce4fb9a98a757b}{BuildPipeline}}(examples);}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ result\ =\ \mbox{\hyperlink{classspell_1_1_program_adbdd27ac546506edc4dee08c573e1406}{ExecuteNlpCommand}}(\textcolor{stringliteral}{"{}remind\ me\ to\ call\ mom\ tomorrow"{}},\ pipeline);}
+\DoxyCodeLine{\textcolor{comment}{//\ result\ ==\ 0\ if\ successful}}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_ac140d4e329d12eef69f5ee06175e2468}\index{spell.Program@{spell.Program}!GetBuiltinExamples@{GetBuiltinExamples}}
+\index{GetBuiltinExamples@{GetBuiltinExamples}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{GetBuiltinExamples()}{GetBuiltinExamples()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_ac140d4e329d12eef69f5ee06175e2468} 
+Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ spell.\+Program.\+Get\+Builtin\+Examples (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Returns built-\/in examples for each intent type. 
+
+\begin{DoxyReturn}{Returns}
+Dictionary with 4 intents and 5 examples for each
+\end{DoxyReturn}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ examples\ =\ \mbox{\hyperlink{classspell_1_1_program_ac140d4e329d12eef69f5ee06175e2468}{GetBuiltinExamples}}();}
+\DoxyCodeLine{\textcolor{comment}{//\ examples["{}timer"{}][0]\ ==\ "{}set\ timer\ for\ 10\ minutes"{}}}
+\DoxyCodeLine{\textcolor{keywordflow}{foreach}\ (var\ intent\ \textcolor{keywordflow}{in}\ examples.Keys)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ Console.WriteLine(\$\textcolor{stringliteral}{"{}\{intent\}:\ \{examples[intent].Length\}\ examples"{}});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_afa85a28253be75d6080d8ea773cd9c76}\index{spell.Program@{spell.Program}!LoadExamples@{LoadExamples}}
+\index{LoadExamples@{LoadExamples}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{LoadExamples()}{LoadExamples()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_afa85a28253be75d6080d8ea773cd9c76} 
+Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ spell.\+Program.\+Load\+Examples (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Loads training examples from JSON file or uses built-\/in ones. 
+
+\begin{DoxyReturn}{Returns}
+Dictionary of examples where key is intent name, value is array of examples
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Json\+Exception} & May throw on invalid JSON (handled internally)\\
+\hline
+{\em IOException} & May throw on file read errors (handled internally)\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ examples\ =\ \mbox{\hyperlink{classspell_1_1_program_afa85a28253be75d6080d8ea773cd9c76}{LoadExamples}}();}
+\DoxyCodeLine{\textcolor{comment}{//\ examples["{}reminder"{}]\ contains\ array\ of\ examples\ for\ reminder}}
+\DoxyCodeLine{Console.WriteLine(\$\textcolor{stringliteral}{"{}Loaded\ \{examples.Count\}\ intent\ types"{}});}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_a57b0366f31e2036e3a8f0e357318519c}\index{spell.Program@{spell.Program}!LogUnlabeled@{LogUnlabeled}}
+\index{LogUnlabeled@{LogUnlabeled}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{LogUnlabeled()}{LogUnlabeled()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_a57b0366f31e2036e3a8f0e357318519c} 
+void spell.\+Program.\+Log\+Unlabeled (\begin{DoxyParamCaption}\item[{string}]{input}{, }\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{res}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Logs unrecognized commands to unlabeled.\+log file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Input command text\\
+\hline
+{\em res} & Intent classification result\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & May throw on write errors (silently ignored)\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult\ }
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \ \ \ Intent\ =\ \textcolor{stringliteral}{"{}unknown"{}},\ }
+\DoxyCodeLine{\ \ \ \ Confidence\ =\ 0.45,\ }
+\DoxyCodeLine{\ \ \ \ RawText\ =\ \textcolor{stringliteral}{"{}do\ something\ strange"{}}\ }
+\DoxyCodeLine{\};}
+\DoxyCodeLine{\mbox{\hyperlink{classspell_1_1_program_a57b0366f31e2036e3a8f0e357318519c}{LogUnlabeled}}(\textcolor{stringliteral}{"{}do\ something\ strange"{}},\ result);}
+\DoxyCodeLine{\textcolor{comment}{//\ Writes\ line\ to\ unlabeled.log\ with\ timestamp}}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_a260ffa0a8e4a7d903e1793d7cc8a31a9}\index{spell.Program@{spell.Program}!Main@{Main}}
+\index{Main@{Main}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{Main()}{Main()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_a260ffa0a8e4a7d903e1793d7cc8a31a9} 
+async Task$<$ int $>$ spell.\+Program.\+Main (\begin{DoxyParamCaption}\item[{string\mbox{[}$\,$\mbox{]}}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Asynchronous entry point of the application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Command line arguments\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Exit code (0 -\/ success, \texorpdfstring{$>$}{>}0 -\/ error)
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May throw exceptions during initialization errors\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Call\ with\ natural\ language\ command}}
+\DoxyCodeLine{spell\ \textcolor{stringliteral}{"{}remind\ me\ to\ call\ mom"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Call\ through\ cast\ command}}
+\DoxyCodeLine{spell\ cast\ \textcolor{stringliteral}{"{}set\ timer\ for\ 5\ minutes"{}}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Direct\ module\ invocation}}
+\DoxyCodeLine{spell\ reminder\ \textcolor{stringliteral}{"{}buy\ milk"{}}}
+
+\end{DoxyCode}
+ Internal function to create a module command
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Module name (reminder, note, timer, convert)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configured Command object with handlers
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Exception} & May throw for unknown module name\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ reminderCmd\ =\ CreateModuleCommand(\textcolor{stringliteral}{"{}reminder"{}});}
+\DoxyCodeLine{root.AddCommand(reminderCmd);}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_program_a34406ca7c959bddff8c9d09c79442f4e}\index{spell.Program@{spell.Program}!PrintUsage@{PrintUsage}}
+\index{PrintUsage@{PrintUsage}!spell.Program@{spell.Program}}
+\doxysubsubsection{\texorpdfstring{PrintUsage()}{PrintUsage()}}
+{\footnotesize\ttfamily \label{classspell_1_1_program_a34406ca7c959bddff8c9d09c79442f4e} 
+void spell.\+Program.\+Print\+Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Prints CLI usage information. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em IOException} & May throw on console output errors\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (\textcolor{keywordtype}{string}.IsNullOrWhiteSpace(userInput))}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classspell_1_1_program_a34406ca7c959bddff8c9d09c79442f4e}{PrintUsage}}();}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_program_8cs}{Program.\+cs}}\end{DoxyCompactItemize}

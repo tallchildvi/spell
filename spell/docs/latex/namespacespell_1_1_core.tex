@@ -1,0 +1,32 @@
+\doxysection{spell.\+Core Namespace Reference}
+\hypertarget{namespacespell_1_1_core}{}\label{namespacespell_1_1_core}\index{spell.Core@{spell.Core}}
+
+
+Semantic classifier using TF-\/\+IDF and cosine similarity.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier}{Hybrid\+Classifier}}
+\begin{DoxyCompactList}\small\item\em Hybrid classifier combining primary and fallback classification strategies. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor}{IEntity\+Extractor}}
+\begin{DoxyCompactList}\small\item\em Interface for entity extraction components in the NLP pipeline. \end{DoxyCompactList}\item 
+interface \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}}
+\begin{DoxyCompactList}\small\item\em Interface for intent classification components in the NLP pipeline. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}
+\begin{DoxyCompactList}\small\item\em Represents the result of intent classification and entity extraction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_keyword_intent_classifier}{Keyword\+Intent\+Classifier}}
+\begin{DoxyCompactList}\small\item\em Keyword-\/based intent classifier using string matching. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}}
+\begin{DoxyCompactList}\small\item\em NLP processing pipeline that chains classification and extraction. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_recognizers_entity_extractor}{Recognizers\+Entity\+Extractor}}
+\begin{DoxyCompactList}\small\item\em Entity extractor using Microsoft.\+Recognizers.\+Text library. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier}{Semantic\+Intent\+Classifier}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Semantic classifier using TF-\/\+IDF and cosine similarity. 
+
+This classifier builds a vector space model from training examples and uses cosine similarity to find the closest matching intent. More flexible than keyword matching but requires training data. 

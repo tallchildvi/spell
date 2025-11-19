@@ -1,0 +1,99 @@
+\doxysection{spell.\+Core.\+Recognizers\+Entity\+Extractor Class Reference}
+\hypertarget{classspell_1_1_core_1_1_recognizers_entity_extractor}{}\label{classspell_1_1_core_1_1_recognizers_entity_extractor}\index{spell.Core.RecognizersEntityExtractor@{spell.Core.RecognizersEntityExtractor}}
+
+
+Entity extractor using Microsoft.\+Recognizers.\+Text library.  
+
+
+Inheritance diagram for spell.\+Core.\+Recognizers\+Entity\+Extractor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_core_1_1_recognizers_entity_extractor}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classspell_1_1_core_1_1_recognizers_entity_extractor_af49e12a8ac40d57946610879a12b736b}{Extract}} (string input, \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Extracts entities from input text and populates \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly string \mbox{\hyperlink{classspell_1_1_core_1_1_recognizers_entity_extractor_a1060c060a6370e31a6817975c3cd02dc}{\+\_\+culture}} = Culture.\+English
+\begin{DoxyCompactList}\small\item\em Culture setting for recognition (English). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entity extractor using Microsoft.\+Recognizers.\+Text library. 
+
+Extracts dates/times, numbers, and dimensional units from text. Gracefully handles extraction failures and ensures text entity is always present. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_core_1_1_recognizers_entity_extractor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_core_1_1_recognizers_entity_extractor_af49e12a8ac40d57946610879a12b736b}\index{spell.Core.RecognizersEntityExtractor@{spell.Core.RecognizersEntityExtractor}!Extract@{Extract}}
+\index{Extract@{Extract}!spell.Core.RecognizersEntityExtractor@{spell.Core.RecognizersEntityExtractor}}
+\doxysubsubsection{\texorpdfstring{Extract()}{Extract()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_recognizers_entity_extractor_af49e12a8ac40d57946610879a12b736b} 
+void spell.\+Core.\+Recognizers\+Entity\+Extractor.\+Extract (\begin{DoxyParamCaption}\item[{string}]{input}{, }\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Extracts entities from input text and populates \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language text to extract entities from\\
+\hline
+{\em result} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} to populate with extracted entities\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & Exceptions are caught and ignored to ensure robustness\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ extractor\ =\ \textcolor{keyword}{new}\ RecognizersEntityExtractor();}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult\ \{\ RawText\ =\ \textcolor{stringliteral}{"{}remind\ me\ in\ 5\ minutes"{}}\ \};}
+\DoxyCodeLine{extractor.Extract(\textcolor{stringliteral}{"{}remind\ me\ in\ 5\ minutes"{}},\ result);}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}datetime"{}]\ contains\ parsed\ time}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}number"{}]\ contains\ 5}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}text"{}]\ contains\ original\ text}}
+
+\end{DoxyCode}
+ 
+
+Extracts\+:
+\begin{DoxyItemize}
+\item datetime\+: dates and times (e.\+g., "{}tomorrow"{}, "{}5 minutes"{}, "{}at 8am"{})
+\item number\+: numeric values (e.\+g., "{}5"{}, "{}twenty"{}, "{}3.\+14"{})
+\item units\+: dimensional units (e.\+g., "{}5 kilograms"{}, "{}10 meters"{})
+\item text\+: original input as fallback 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor_ab1a05979b6408b64ec8cca91ddfbc4c2}{spell.\+Core.\+IEntity\+Extractor}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classspell_1_1_core_1_1_recognizers_entity_extractor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspell_1_1_core_1_1_recognizers_entity_extractor_a1060c060a6370e31a6817975c3cd02dc}\index{spell.Core.RecognizersEntityExtractor@{spell.Core.RecognizersEntityExtractor}!\_culture@{\_culture}}
+\index{\_culture@{\_culture}!spell.Core.RecognizersEntityExtractor@{spell.Core.RecognizersEntityExtractor}}
+\doxysubsubsection{\texorpdfstring{\_culture}{\_culture}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_recognizers_entity_extractor_a1060c060a6370e31a6817975c3cd02dc} 
+readonly string spell.\+Core.\+Recognizers\+Entity\+Extractor.\+\_\+culture = Culture.\+English\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Culture setting for recognition (English). 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_recognizers_entity_extractor_8cs}{Recognizers\+Entity\+Extractor.\+cs}}\end{DoxyCompactItemize}

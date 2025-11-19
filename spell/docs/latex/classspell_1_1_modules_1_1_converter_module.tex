@@ -1,0 +1,106 @@
+\doxysection{spell.\+Modules.\+Converter\+Module Class Reference}
+\hypertarget{classspell_1_1_modules_1_1_converter_module}{}\label{classspell_1_1_modules_1_1_converter_module}\index{spell.Modules.ConverterModule@{spell.Modules.ConverterModule}}
+
+
+Module for processing unit conversion requests.  
+
+
+Inheritance diagram for spell.\+Modules.\+Converter\+Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_modules_1_1_converter_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classspell_1_1_modules_1_1_converter_module_a56fea8daf4497b560edf1899d292684a}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Processes conversion intent by extracting and displaying unit information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void IModule. \mbox{\hyperlink{classspell_1_1_modules_1_1_converter_module_a332f273dc493df655054069b62c5d010}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Explicit interface implementation that delegates to static Process method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module for processing unit conversion requests. 
+
+Extracts and displays dimensional units from natural language. Handles conversions like "{}5 kilograms to grams"{}, "{}10 USD to EUR"{}, "{}37 celsius to fahrenheit"{}. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_modules_1_1_converter_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_modules_1_1_converter_module_a332f273dc493df655054069b62c5d010}\index{spell.Modules.ConverterModule@{spell.Modules.ConverterModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.ConverterModule@{spell.Modules.ConverterModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_converter_module_a332f273dc493df655054069b62c5d010} 
+void IModule. spell.\+Modules.\+Converter\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Explicit interface implementation that delegates to static Process method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} to process\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+\Hypertarget{classspell_1_1_modules_1_1_converter_module_a56fea8daf4497b560edf1899d292684a}\index{spell.Modules.ConverterModule@{spell.Modules.ConverterModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.ConverterModule@{spell.Modules.ConverterModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_converter_module_a56fea8daf4497b560edf1899d292684a} 
+void spell.\+Modules.\+Converter\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Processes conversion intent by extracting and displaying unit information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing conversion request and extracted units\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May throw during entity access or console output\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ Intent\ =\ \textcolor{stringliteral}{"{}convert"{}},}
+\DoxyCodeLine{\ \ \ \ Confidence\ =\ 0.92,}
+\DoxyCodeLine{\ \ \ \ Entities\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}units"{}}]\ =\ recognizedUnits,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}text"{}}]\ =\ \textcolor{stringliteral}{"{}convert\ 5\ kg\ to\ grams"{}}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{ConverterModule.Process(result);}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ Unit\ result:\ type=Dimension\ text='5\ kg'\ resolution=...}}
+
+\end{DoxyCode}
+ 
+
+Displays\+:
+\begin{DoxyItemize}
+\item Intent confidence score
+\item Recognized units with type, text, and resolution details
+\item Raw conversion request if no units extracted 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Modules/\mbox{\hyperlink{_converter_module_8cs}{Converter\+Module.\+cs}}\end{DoxyCompactItemize}

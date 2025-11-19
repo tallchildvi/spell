@@ -1,0 +1,110 @@
+\doxysection{spell.\+Core.\+Keyword\+Intent\+Classifier Class Reference}
+\hypertarget{classspell_1_1_core_1_1_keyword_intent_classifier}{}\label{classspell_1_1_core_1_1_keyword_intent_classifier}\index{spell.Core.KeywordIntentClassifier@{spell.Core.KeywordIntentClassifier}}
+
+
+Keyword-\/based intent classifier using string matching.  
+
+
+Inheritance diagram for spell.\+Core.\+Keyword\+Intent\+Classifier\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_core_1_1_keyword_intent_classifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} \mbox{\hyperlink{classspell_1_1_core_1_1_keyword_intent_classifier_a69dc000fb8e0dfbc5770af27487ce357}{Classify}} (string input)
+\begin{DoxyCompactList}\small\item\em Classifies input text by matching keywords. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly Dictionary$<$ string, string $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_keyword_intent_classifier_a80c58da71f6800f1b5f821b528d4eda8}{\+\_\+keyword\+To\+Intent}}
+\begin{DoxyCompactList}\small\item\em Dictionary mapping keywords to intent names. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Keyword-\/based intent classifier using string matching. 
+
+This classifier uses a predefined dictionary of keywords to identify intents. It\textquotesingle{}s fast but limited to exact keyword matches. Works well for unambiguous commands with clear trigger words. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_core_1_1_keyword_intent_classifier_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_core_1_1_keyword_intent_classifier_a69dc000fb8e0dfbc5770af27487ce357}\index{spell.Core.KeywordIntentClassifier@{spell.Core.KeywordIntentClassifier}!Classify@{Classify}}
+\index{Classify@{Classify}!spell.Core.KeywordIntentClassifier@{spell.Core.KeywordIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{Classify()}{Classify()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_keyword_intent_classifier_a69dc000fb8e0dfbc5770af27487ce357} 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} spell.\+Core.\+Keyword\+Intent\+Classifier.\+Classify (\begin{DoxyParamCaption}\item[{string}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Classifies input text by matching keywords. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language text to classify\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} with matched intent and confidence score
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & Not thrown, handles null gracefully\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ classifier\ =\ \textcolor{keyword}{new}\ KeywordIntentClassifier();}
+\DoxyCodeLine{var\ result\ =\ classifier.Classify(\textcolor{stringliteral}{"{}remind\ me\ to\ call"{}});}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Intent\ ==\ "{}reminder"{}}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Confidence\ between\ 0.4\ and\ 0.95}}
+
+\end{DoxyCode}
+ 
+
+Confidence calculation\+: 0.\+4 base + 0.\+3 \texorpdfstring{$\ast$}{*} keyword\+\_\+count, capped at 0.\+95 
+
+Implements \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier_a7ac829dd5dbddc7074f8de2f49415eac}{spell.\+Core.\+IIntent\+Classifier}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classspell_1_1_core_1_1_keyword_intent_classifier_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspell_1_1_core_1_1_keyword_intent_classifier_a80c58da71f6800f1b5f821b528d4eda8}\index{spell.Core.KeywordIntentClassifier@{spell.Core.KeywordIntentClassifier}!\_keywordToIntent@{\_keywordToIntent}}
+\index{\_keywordToIntent@{\_keywordToIntent}!spell.Core.KeywordIntentClassifier@{spell.Core.KeywordIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{\_keywordToIntent}{\_keywordToIntent}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_keyword_intent_classifier_a80c58da71f6800f1b5f821b528d4eda8} 
+readonly Dictionary$<$string, string$>$ spell.\+Core.\+Keyword\+Intent\+Classifier.\+\_\+keyword\+To\+Intent\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}remind"{}},\ \textcolor{stringliteral}{"{}reminder"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}reminder"{}},\ \textcolor{stringliteral}{"{}reminder"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}remember"{}},\ \textcolor{stringliteral}{"{}note"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}note"{}},\ \textcolor{stringliteral}{"{}note"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}take\ note"{}},\ \textcolor{stringliteral}{"{}note"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}timer"{}},\ \textcolor{stringliteral}{"{}timer"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}in\ "{}},\ \textcolor{stringliteral}{"{}timer"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}for\ "{}},\ \textcolor{stringliteral}{"{}timer"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}convert"{}},\ \textcolor{stringliteral}{"{}convert"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}to\ "{}},\ \textcolor{stringliteral}{"{}convert"{}}\},}
+\DoxyCodeLine{\ \ \ \ \{\textcolor{stringliteral}{"{}how\ many"{}},\ \textcolor{stringliteral}{"{}convert"{}}\}}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Dictionary mapping keywords to intent names. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_keyword_intent_classifier_8cs}{Keyword\+Intent\+Classifier.\+cs}}\end{DoxyCompactItemize}
