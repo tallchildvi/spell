@@ -1,6 +1,8 @@
-﻿/// @file Program.cs
-/// @brief Main entry point for the spell CLI assistant application with NLP capabilities
-/// 
+﻿/// <file>
+/// <summary>
+/// Program.cs - Main entry point for spell CLI assistant application
+/// </summary>
+/// </file>
 using spell.Core;
 using spell.Modules;
 using System;
@@ -13,16 +15,19 @@ using System.Threading.Tasks;
 
 namespace spell
 {
-    /// @class Program
-    /// @brief Main program class containing entry point and CLI configuration
+    /// <summary>
+    /// Main program class containing entry point and CLI configuration
+    /// </summary>
     class Program
     {
-        /// @brief Asynchronous entry point of the application
-        /// @param args Command line arguments
-        /// @return Exit code (0 - success, >0 - error)
-        /// @throws Exception May throw exceptions during initialization errors
-        /// @example
-        /// @code
+        /// <summary>
+        /// Asynchronous entry point of the application
+        /// </summary>
+        /// <param name="args">Command line arguments</param>
+        /// <returns>Exit code (0 - success, >0 - error)</returns>
+        /// <exception cref="Exception">May throw exceptions during initialization errors</exception>
+        /// <example>
+        /// <code>
         /// // Call with natural language command
         /// spell "remind me to call mom"
         /// 
@@ -31,7 +36,8 @@ namespace spell
         /// 
         /// // Direct module invocation
         /// spell reminder "buy milk"
-        /// @endcode
+        /// </code>
+        /// </example>
         static async Task<int> Main(string[] args)
         {
             var examples = LoadExamples();
@@ -78,16 +84,18 @@ namespace spell
 
             root.AddCommand(castCmd);
 
-            /// @brief Internal function to create a module command
-            /// @param name Module name (reminder, note, timer, convert)
-            /// @return Configured Command object with handlers
-            /// @throws ArgumentException May throw for unknown module name
-            /// @example
-            /// @code
+            /// <summary>
+            /// Internal function to create a module command
+            /// </summary>
+            /// <param name="name">Module name (reminder, note, timer, convert)</param>
+            /// <returns>Configured Command object with handlers</returns>
+            /// <exception cref="ArgumentException">May throw for unknown module name</exception>
+            /// <example>
+            /// <code>
             /// var reminderCmd = CreateModuleCommand("reminder");
             /// root.AddCommand(reminderCmd);
-            /// @endcode
-
+            /// </code>
+            /// </example>
             Command CreateModuleCommand(string name)
             {
                 var cmd = new Command(name, $"Operate with {name}s");
@@ -157,17 +165,20 @@ namespace spell
             return await root.InvokeAsync(args);
         }
 
-        /// @brief Executes natural language command processing through NLP pipeline
-        /// @param commandText Natural language command text
-        /// @param pipeline Configured NLP pipeline for processing
-        /// @return Exit code (0 - success, 2 - pipeline error, 3 - module error)
-        /// @throws Exception Exceptions are handled internally and converted to error codes
-        /// @example
-        /// @code
+        /// <summary>
+        /// Executes natural language command processing through NLP pipeline
+        /// </summary>
+        /// <param name="commandText">Natural language command text</param>
+        /// <param name="pipeline">Configured NLP pipeline for processing</param>
+        /// <returns>Exit code (0 - success, 2 - pipeline error, 3 - module error)</returns>
+        /// <exception cref="Exception">Exceptions are handled internally and converted to error codes</exception>
+        /// <example>
+        /// <code>
         /// var pipeline = BuildPipeline(examples);
         /// int result = ExecuteNlpCommand("remind me to call mom tomorrow", pipeline);
         /// // result == 0 if successful
-        /// @endcode
+        /// </code>
+        /// </example>
         static int ExecuteNlpCommand(string commandText, NlpPipeline pipeline)
         {
             Console.WriteLine($"Processing (NLP): \"{commandText}\"\n");
@@ -215,19 +226,23 @@ namespace spell
 
             return 0;
         }
-        /// @brief Builds NLP pipeline with classifiers and entity extractor
-        /// @param examples Dictionary of examples for training semantic classifier
-        /// @return Configured NlpPipeline with hybrid classifier
-        /// @throws ArgumentNullException May throw if examples == null
-        /// @example
-        /// @code
-        /// var examples = new Dictionary<string, string[]>
+
+        /// <summary>
+        /// Builds NLP pipeline with classifiers and entity extractor
+        /// </summary>
+        /// <param name="examples">Dictionary of examples for training semantic classifier</param>
+        /// <returns>Configured NlpPipeline with hybrid classifier</returns>
+        /// <exception cref="ArgumentNullException">May throw if examples is null</exception>
+        /// <example>
+        /// <code>
+        /// var examples = new Dictionary&lt;string, string[]&gt;
         /// {
         ///     ["reminder"] = new[] { "remind me to...", "set reminder..." }
         /// };
         /// var pipeline = BuildPipeline(examples);
         /// var result = pipeline.Handle("remind me to call");
-        /// @endcode
+        /// </code>
+        /// </example>
         static NlpPipeline BuildPipeline(Dictionary<string, string[]> examples)
         {
             var keywordClassifier = new KeywordIntentClassifier();
@@ -239,16 +254,18 @@ namespace spell
             return new NlpPipeline(hybridClassifier, new RecognizersEntityExtractor());
         }
 
-        /// @brief Prints CLI usage information
-        /// @return void
-        /// @throws IOException May throw on console output errors
-        /// @example
-        /// @code
+        /// <summary>
+        /// Prints CLI usage information
+        /// </summary>
+        /// <exception cref="IOException">May throw on console output errors</exception>
+        /// <example>
+        /// <code>
         /// if (string.IsNullOrWhiteSpace(userInput))
         /// {
         ///     PrintUsage();
         /// }
-        /// @endcode
+        /// </code>
+        /// </example>
         private static void PrintUsage()
         {
             Console.WriteLine("Usage:");
@@ -264,16 +281,19 @@ namespace spell
             Console.WriteLine("  spell \"<natural-language-command>\"          Shortcut for cast");
         }
 
-        /// @brief Loads training examples from JSON file or uses built-in ones
-        /// @return Dictionary of examples where key is intent name, value is array of examples
-        /// @throws JsonException May throw on invalid JSON (handled internally)
-        /// @throws IOException May throw on file read errors (handled internally)
-        /// @example
-        /// @code
+        /// <summary>
+        /// Loads training examples from JSON file or uses built-in ones
+        /// </summary>
+        /// <returns>Dictionary of examples where key is intent name, value is array of examples</returns>
+        /// <exception cref="JsonException">May throw on invalid JSON (handled internally)</exception>
+        /// <exception cref="IOException">May throw on file read errors (handled internally)</exception>
+        /// <example>
+        /// <code>
         /// var examples = LoadExamples();
         /// // examples["reminder"] contains array of examples for reminder
         /// Console.WriteLine($"Loaded {examples.Count} intent types");
-        /// @endcode
+        /// </code>
+        /// </example>
         private static Dictionary<string, string[]> LoadExamples()
         {
             var baseDir = AppContext.BaseDirectory ?? Directory.GetCurrentDirectory();
@@ -298,18 +318,20 @@ namespace spell
             return GetBuiltinExamples();
         }
 
-        /// @brief Returns built-in examples for each intent type
-        /// @return Dictionary with 4 intents and 5 examples for each
-        /// @throws None
-        /// @example
-        /// @code
+        /// <summary>
+        /// Returns built-in examples for each intent type
+        /// </summary>
+        /// <returns>Dictionary with 4 intents and 5 examples for each</returns>
+        /// <example>
+        /// <code>
         /// var examples = GetBuiltinExamples();
         /// // examples["timer"][0] == "set timer for 10 minutes"
         /// foreach (var intent in examples.Keys)
         /// {
         ///     Console.WriteLine($"{intent}: {examples[intent].Length} examples");
         /// }
-        /// @endcode
+        /// </code>
+        /// </example>
         private static Dictionary<string, string[]> GetBuiltinExamples() => new()
         {
             ["reminder"] = new[]
@@ -346,13 +368,14 @@ namespace spell
             }
         };
 
-        /// @brief Logs unrecognized commands to unlabeled.log file
-        /// @param input Input command text
-        /// @param res Intent classification result
-        /// @return void
-        /// @throws IOException May throw on write errors (silently ignored)
-        /// @example
-        /// @code
+        /// <summary>
+        /// Logs unrecognized commands to unlabeled.log file
+        /// </summary>
+        /// <param name="input">Input command text</param>
+        /// <param name="res">Intent classification result</param>
+        /// <exception cref="IOException">May throw on write errors (silently ignored)</exception>
+        /// <example>
+        /// <code>
         /// var result = new IntentResult 
         /// { 
         ///     Intent = "unknown", 
@@ -361,8 +384,8 @@ namespace spell
         /// };
         /// LogUnlabeled("do something strange", result);
         /// // Writes line to unlabeled.log with timestamp
-        /// @endcode
-        /// 
+        /// </code>
+        /// </example>
         private static void LogUnlabeled(string input, IntentResult res)
         {
             try
