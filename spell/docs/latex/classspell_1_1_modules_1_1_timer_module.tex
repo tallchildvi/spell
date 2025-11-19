@@ -1,0 +1,107 @@
+\doxysection{spell.\+Modules.\+Timer\+Module Class Reference}
+\hypertarget{classspell_1_1_modules_1_1_timer_module}{}\label{classspell_1_1_modules_1_1_timer_module}\index{spell.Modules.TimerModule@{spell.Modules.TimerModule}}
+
+
+Module for processing timer and countdown requests.  
+
+
+Inheritance diagram for spell.\+Modules.\+Timer\+Module\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_modules_1_1_timer_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classspell_1_1_modules_1_1_timer_module_a29b37ad415bac40a58af339a0d32912a}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Processes timer intent by extracting duration information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void IModule. \mbox{\hyperlink{classspell_1_1_modules_1_1_timer_module_a9ccb0350029b04d2b6c0e5a71ad9c06b}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Explicit interface implementation that delegates to static Process method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Module for processing timer and countdown requests. 
+
+Extracts duration entities from natural language. Handles commands like "{}set timer for 10 minutes"{}, "{}start countdown for 30 seconds"{}, "{}timer 5 minutes"{}. 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_modules_1_1_timer_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_modules_1_1_timer_module_a9ccb0350029b04d2b6c0e5a71ad9c06b}\index{spell.Modules.TimerModule@{spell.Modules.TimerModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.TimerModule@{spell.Modules.TimerModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_timer_module_a9ccb0350029b04d2b6c0e5a71ad9c06b} 
+void IModule. spell.\+Modules.\+Timer\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Explicit interface implementation that delegates to static Process method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} to process\\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+\Hypertarget{classspell_1_1_modules_1_1_timer_module_a29b37ad415bac40a58af339a0d32912a}\index{spell.Modules.TimerModule@{spell.Modules.TimerModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.TimerModule@{spell.Modules.TimerModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classspell_1_1_modules_1_1_timer_module_a29b37ad415bac40a58af339a0d32912a} 
+void spell.\+Modules.\+Timer\+Module.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Processes timer intent by extracting duration information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing timer request and extracted entities\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May throw during entity access or console output\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ Intent\ =\ \textcolor{stringliteral}{"{}timer"{}},}
+\DoxyCodeLine{\ \ \ \ Confidence\ =\ 0.91,}
+\DoxyCodeLine{\ \ \ \ Entities\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ object>}
+\DoxyCodeLine{\ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}datetime"{}}]\ =\ recognizedDuration,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ [\textcolor{stringliteral}{"{}text"{}}]\ =\ \textcolor{stringliteral}{"{}set\ timer\ for\ 5\ minutes"{}}}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{TimerModule.Process(result);}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ [Timer]\ Intent\ confidence:\ 0.91}}
+\DoxyCodeLine{\textcolor{comment}{//\ Output:\ Found\ datetime/entity:\ type=datetimeV2.duration\ text='5\ minutes'}}
+
+\end{DoxyCode}
+ 
+
+Displays\+:
+\begin{DoxyItemize}
+\item Intent confidence score
+\item Recognized datetime/duration entities with type and text
+\item Raw timer request if no entities extracted 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{spell.\+Modules.\+IModule}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Modules/\mbox{\hyperlink{_timer_module_8cs}{Timer\+Module.\+cs}}\end{DoxyCompactItemize}

@@ -1,0 +1,71 @@
+\doxysection{spell.\+Modules.\+IModule Interface Reference}
+\hypertarget{interfacespell_1_1_modules_1_1_i_module}{}\label{interfacespell_1_1_modules_1_1_i_module}\index{spell.Modules.IModule@{spell.Modules.IModule}}
+
+
+Interface for modules that process intent classification results.  
+
+
+Inheritance diagram for spell.\+Modules.\+IModule\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.393035cm]{interfacespell_1_1_modules_1_1_i_module}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}{Process}} (\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} command)
+\begin{DoxyCompactList}\small\item\em Processes the classified intent and executes corresponding module logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for modules that process intent classification results. 
+
+Implementations handle specific intent types and execute corresponding actions. \doxylink{namespacespell_1_1_modules}{Modules} receive \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing intent, confidence, and extracted entities. 
+
+\label{doc-func-members}
+\Hypertarget{interfacespell_1_1_modules_1_1_i_module_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34}\index{spell.Modules.IModule@{spell.Modules.IModule}!Process@{Process}}
+\index{Process@{Process}!spell.Modules.IModule@{spell.Modules.IModule}}
+\doxysubsubsection{\texorpdfstring{Process()}{Process()}}
+{\footnotesize\ttfamily \label{interfacespell_1_1_modules_1_1_i_module_adec5308da3d6c8fa4a7a523a81f97a34} 
+void spell.\+Modules.\+IModule.\+Process (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Processes the classified intent and executes corresponding module logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing classified intent and extracted entities\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May throw exceptions during processing\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{IModule\ module\ =\ \textcolor{keyword}{new}\ ReminderModule();}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult\ }
+\DoxyCodeLine{\{\ }
+\DoxyCodeLine{\ \ \ \ Intent\ =\ \textcolor{stringliteral}{"{}reminder"{}},\ }
+\DoxyCodeLine{\ \ \ \ Confidence\ =\ 0.95,}
+\DoxyCodeLine{\ \ \ \ Entities\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ object>\ \{\ [\textcolor{stringliteral}{"{}text"{}}]\ =\ \textcolor{stringliteral}{"{}call\ mom"{}}\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{module.Process(result);}
+
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classspell_1_1_modules_1_1_converter_module_a332f273dc493df655054069b62c5d010}{spell.\+Modules.\+Converter\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_converter_module_a56fea8daf4497b560edf1899d292684a}{spell.\+Modules.\+Converter\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_notes_module_a0d5c2ac6fbcaf11fceccfa3f45b69872}{spell.\+Modules.\+Notes\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_notes_module_a19429c02b420e9d3d27d641ef394240f}{spell.\+Modules.\+Notes\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_reminder_module_a1a0b1ddb2d45e7da97659c744375e798}{spell.\+Modules.\+Reminder\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_reminder_module_a331fe12a2da44e2d26fc2a52560c9b9c}{spell.\+Modules.\+Reminder\+Module}}, \mbox{\hyperlink{classspell_1_1_modules_1_1_timer_module_a9ccb0350029b04d2b6c0e5a71ad9c06b}{spell.\+Modules.\+Timer\+Module}}, and \mbox{\hyperlink{classspell_1_1_modules_1_1_timer_module_a29b37ad415bac40a58af339a0d32912a}{spell.\+Modules.\+Timer\+Module}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Modules/\mbox{\hyperlink{_i_module_8cs}{IModule.\+cs}}\end{DoxyCompactItemize}

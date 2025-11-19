@@ -1,0 +1,66 @@
+\chapter{🪄 spell — Command-\/\+Line Assistant }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{🪄 spell — Command-\/Line Assistant@{🪄 spell — Command-\/Line Assistant}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+{\bfseries{spell}} — a lightweight, modular CLI utility for performing tasks in natural language.
+
+It supports reminders, timers, unit conversion, and note-\/taking.
+
+Under the hood — a hybrid NLP system combining Keyword Matching, TF-\/\+IDF, and Cosine Similarity, working entirely offline without any internet connection.
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Quick Start}{Quick Start}}\label{md__r_e_a_d_m_e_autotoc_md2}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{\texorpdfstring{Build and Run}{Build and Run}}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{dotnet\ build}
+\DoxyCodeLine{dotnet\ run\ spell\ cast\ "{}remind\ me\ to\ call\ mom\ tomorrow"{}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{\texorpdfstring{⚙️ Commands}{⚙️ Commands}}\label{md__r_e_a_d_m_e_autotoc_md5}
+All commands start with the word {\bfseries{spell}}.
+
+Then comes the subcommand {\bfseries{cast}}, followed by a natural language description of the action.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{spell\ cast\ "{}set\ a\ timer\ for\ 10\ minutes"{}}
+\DoxyCodeLine{spell\ cast\ "{}convert\ 10\ kilometers\ to\ miles"{}}
+\DoxyCodeLine{spell\ cast\ "{}take\ a\ note:\ project\ deadline\ next\ week"{}}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{\texorpdfstring{🧩 Architecture}{🧩 Architecture}}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ \ \ \ CLI\ Core\ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ v}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ NLP\ Pipeline\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ KeywordIntentClassifier\ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ SemanticIntentClassifier\ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ HybridClassifier\ \ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ RecognizersEntityExtractor\ |}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ v}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+\DoxyCodeLine{|\ \ \ \ \ Modules\ Layer\ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ ReminderModule\ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ TimerModule\ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ NotesModule\ \ \ \ \ \ \ \ \ |}
+\DoxyCodeLine{|\ \ -\/\ ConverterModule\ \ \ \ \ |}
+\DoxyCodeLine{+-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/+}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{🗂️ Documentation}{🗂️ Documentation}}\label{md__r_e_a_d_m_e_autotoc_md8}
