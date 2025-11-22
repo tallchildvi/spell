@@ -1,0 +1,82 @@
+\doxysection{spell.\+Core.\+Intent\+Result Class Reference}
+\hypertarget{classspell_1_1_core_1_1_intent_result}{}\label{classspell_1_1_core_1_1_intent_result}\index{spell.Core.IntentResult@{spell.Core.IntentResult}}
+
+
+Represents the result of intent classification and entity extraction.  
+
+
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result_a8d8cdb49b4eca948269add231385943d}{Intent}} = "{}unknown"{}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the classified intent name (e.\+g., "{}reminder"{}, "{}note"{}, "{}timer"{}, "{}convert"{}, "{}unknown"{}). \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result_a9053fc797fb8f1e0c2b50cbc75dc83b6}{Confidence}} = 0.\+0\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the confidence score of the classification. \end{DoxyCompactList}\item 
+Dictionary$<$ string, object $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result_a24addce288b201d67ae1a3eee2ae079c}{Entities}} = new()\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the dictionary of extracted entities. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{classspell_1_1_core_1_1_intent_result_aeb5e738f89050e66e9d0eaa19c23f8aa}{Raw\+Text}} = string.\+Empty\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the original input text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the result of intent classification and entity extraction. 
+
+This class stores the classified intent, confidence score, extracted entities, and the original raw text. It serves as the communication object between NLP pipeline components and module processors. 
+
+\label{doc-property-members}
+\Hypertarget{classspell_1_1_core_1_1_intent_result_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{classspell_1_1_core_1_1_intent_result_a9053fc797fb8f1e0c2b50cbc75dc83b6}\index{spell.Core.IntentResult@{spell.Core.IntentResult}!Confidence@{Confidence}}
+\index{Confidence@{Confidence}!spell.Core.IntentResult@{spell.Core.IntentResult}}
+\doxysubsubsection{\texorpdfstring{Confidence}{Confidence}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_intent_result_a9053fc797fb8f1e0c2b50cbc75dc83b6} 
+double spell.\+Core.\+Intent\+Result.\+Confidence = 0.\+0\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the confidence score of the classification. 
+
+Confidence value between 0.\+0 and 1.\+0, defaults to 0.\+0\Hypertarget{classspell_1_1_core_1_1_intent_result_a24addce288b201d67ae1a3eee2ae079c}\index{spell.Core.IntentResult@{spell.Core.IntentResult}!Entities@{Entities}}
+\index{Entities@{Entities}!spell.Core.IntentResult@{spell.Core.IntentResult}}
+\doxysubsubsection{\texorpdfstring{Entities}{Entities}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_intent_result_a24addce288b201d67ae1a3eee2ae079c} 
+Dictionary$<$string, object$>$ spell.\+Core.\+Intent\+Result.\+Entities = new()\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the dictionary of extracted entities. 
+
+Dictionary where key is entity type (e.\+g., "{}datetime"{}, "{}number"{}) and value is the extracted entity
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ \textcolor{keyword}{new}\ IntentResult();}
+\DoxyCodeLine{result.Entities[\textcolor{stringliteral}{"{}datetime"{}}]\ =\ parsedDateTime;}
+\DoxyCodeLine{result.Entities[\textcolor{stringliteral}{"{}text"{}}]\ =\ \textcolor{stringliteral}{"{}buy\ milk"{}};}
+
+\end{DoxyCode}
+ \Hypertarget{classspell_1_1_core_1_1_intent_result_a8d8cdb49b4eca948269add231385943d}\index{spell.Core.IntentResult@{spell.Core.IntentResult}!Intent@{Intent}}
+\index{Intent@{Intent}!spell.Core.IntentResult@{spell.Core.IntentResult}}
+\doxysubsubsection{\texorpdfstring{Intent}{Intent}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_intent_result_a8d8cdb49b4eca948269add231385943d} 
+string spell.\+Core.\+Intent\+Result.\+Intent = "{}unknown"{}\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the classified intent name (e.\+g., "{}reminder"{}, "{}note"{}, "{}timer"{}, "{}convert"{}, "{}unknown"{}). 
+
+Intent name as string, defaults to "{}unknown"{}\Hypertarget{classspell_1_1_core_1_1_intent_result_aeb5e738f89050e66e9d0eaa19c23f8aa}\index{spell.Core.IntentResult@{spell.Core.IntentResult}!RawText@{RawText}}
+\index{RawText@{RawText}!spell.Core.IntentResult@{spell.Core.IntentResult}}
+\doxysubsubsection{\texorpdfstring{RawText}{RawText}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_intent_result_aeb5e738f89050e66e9d0eaa19c23f8aa} 
+string spell.\+Core.\+Intent\+Result.\+Raw\+Text = string.\+Empty\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the original input text. 
+
+Raw unprocessed input text, defaults to empty string
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_intent_result_8cs}{Intent\+Result.\+cs}}\end{DoxyCompactItemize}

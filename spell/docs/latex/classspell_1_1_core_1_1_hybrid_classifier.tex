@@ -1,0 +1,171 @@
+\doxysection{spell.\+Core.\+Hybrid\+Classifier Class Reference}
+\hypertarget{classspell_1_1_core_1_1_hybrid_classifier}{}\label{classspell_1_1_core_1_1_hybrid_classifier}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+
+
+Hybrid classifier combining primary and fallback classification strategies.  
+
+
+Inheritance diagram for spell.\+Core.\+Hybrid\+Classifier\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_core_1_1_hybrid_classifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_abfe79e46881216241ad1b67bfb32bf2b}{Hybrid\+Classifier}} (\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} primary, \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} fallback)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of \doxylink{classspell_1_1_core_1_1_hybrid_classifier}{Hybrid\+Classifier}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_a55eaacf614e158635608b6d2c0d6331a}{Classify}} (string input)
+\begin{DoxyCompactList}\small\item\em Classifies input using hybrid strategy with fallback logic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_a0554b40cbf9cc48737efc8a497cdf210}{Primary\+Confidence\+Threshold}} = 0.\+5\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the confidence threshold for primary classifier acceptance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_ae80782e93732de19d4b2814dc218a19b}{\+\_\+primary}}
+\begin{DoxyCompactList}\small\item\em Primary classifier (typically keyword-\/based for speed). \end{DoxyCompactList}\item 
+readonly \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_a4a0afac87e4aaded79180527271635f7}{\+\_\+fallback}}
+\begin{DoxyCompactList}\small\item\em Fallback classifier (typically semantic for accuracy). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hybrid classifier combining primary and fallback classification strategies. 
+
+Uses primary classifier first (fast), falls back to secondary classifier if primary confidence is low or returns unknown intent 
+
+\label{doc-constructors}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_abfe79e46881216241ad1b67bfb32bf2b}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}!HybridClassifier@{HybridClassifier}}
+\index{HybridClassifier@{HybridClassifier}!spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+\doxysubsubsection{\texorpdfstring{HybridClassifier()}{HybridClassifier()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_hybrid_classifier_abfe79e46881216241ad1b67bfb32bf2b} 
+spell.\+Core.\+Hybrid\+Classifier.\+Hybrid\+Classifier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}}}]{primary}{, }\item[{\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}}}]{fallback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of \doxylink{classspell_1_1_core_1_1_hybrid_classifier}{Hybrid\+Classifier}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em primary} & Primary classifier to try first\\
+\hline
+{\em fallback} & Fallback classifier to use if primary fails\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & Thrown when primary or fallback is null\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ keyword\ =\ \textcolor{keyword}{new}\ KeywordIntentClassifier();}
+\DoxyCodeLine{var\ semantic\ =\ \textcolor{keyword}{new}\ SemanticIntentClassifier(examples);}
+\DoxyCodeLine{var\ hybrid\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_abfe79e46881216241ad1b67bfb32bf2b}{HybridClassifier}}(keyword,\ semantic)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classspell_1_1_core_1_1_hybrid_classifier_a0554b40cbf9cc48737efc8a497cdf210}{PrimaryConfidenceThreshold}}\ =\ 0.6}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_a55eaacf614e158635608b6d2c0d6331a}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}!Classify@{Classify}}
+\index{Classify@{Classify}!spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+\doxysubsubsection{\texorpdfstring{Classify()}{Classify()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_hybrid_classifier_a55eaacf614e158635608b6d2c0d6331a} 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} spell.\+Core.\+Hybrid\+Classifier.\+Classify (\begin{DoxyParamCaption}\item[{string}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Classifies input using hybrid strategy with fallback logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language text to classify\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Best \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} from primary or fallback classifier
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Exception} & May propagate exceptions from underlying classifiers\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ hybrid.Classify(\textcolor{stringliteral}{"{}remind\ me\ to\ call\ mom"{}});}
+\DoxyCodeLine{\textcolor{comment}{//\ Uses\ keyword\ classifier\ first}}
+\DoxyCodeLine{\textcolor{comment}{//\ Falls\ back\ to\ semantic\ if\ confidence\ <\ threshold}}
+
+\end{DoxyCode}
+ 
+
+Decision logic\+:
+\begin{DoxyEnumerate}
+\item Try primary classifier
+\item If result is unknown or confidence \texorpdfstring{$<$}{<} threshold, try fallback
+\item Return fallback result if better than primary \texorpdfstring{$<$}{<}/remarks 
+\end{DoxyEnumerate}
+
+Implements \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier_a7ac829dd5dbddc7074f8de2f49415eac}{spell.\+Core.\+IIntent\+Classifier}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_a4a0afac87e4aaded79180527271635f7}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}!\_fallback@{\_fallback}}
+\index{\_fallback@{\_fallback}!spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+\doxysubsubsection{\texorpdfstring{\_fallback}{\_fallback}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_hybrid_classifier_a4a0afac87e4aaded79180527271635f7} 
+readonly \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} spell.\+Core.\+Hybrid\+Classifier.\+\_\+fallback\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Fallback classifier (typically semantic for accuracy). 
+
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_ae80782e93732de19d4b2814dc218a19b}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}!\_primary@{\_primary}}
+\index{\_primary@{\_primary}!spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+\doxysubsubsection{\texorpdfstring{\_primary}{\_primary}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_hybrid_classifier_ae80782e93732de19d4b2814dc218a19b} 
+readonly \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} spell.\+Core.\+Hybrid\+Classifier.\+\_\+primary\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Primary classifier (typically keyword-\/based for speed). 
+
+
+
+\label{doc-property-members}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{classspell_1_1_core_1_1_hybrid_classifier_a0554b40cbf9cc48737efc8a497cdf210}\index{spell.Core.HybridClassifier@{spell.Core.HybridClassifier}!PrimaryConfidenceThreshold@{PrimaryConfidenceThreshold}}
+\index{PrimaryConfidenceThreshold@{PrimaryConfidenceThreshold}!spell.Core.HybridClassifier@{spell.Core.HybridClassifier}}
+\doxysubsubsection{\texorpdfstring{PrimaryConfidenceThreshold}{PrimaryConfidenceThreshold}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_hybrid_classifier_a0554b40cbf9cc48737efc8a497cdf210} 
+double spell.\+Core.\+Hybrid\+Classifier.\+Primary\+Confidence\+Threshold = 0.\+5\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the confidence threshold for primary classifier acceptance. 
+
+Threshold value between 0.\+0 and 1.\+0, defaults to 0.\+5
+
+If primary confidence is below this threshold, fallback classifier is used 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_hybrid_classifier_8cs}{Hybrid\+Classifier.\+cs}}\end{DoxyCompactItemize}

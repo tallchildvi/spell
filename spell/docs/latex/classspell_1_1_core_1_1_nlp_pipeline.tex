@@ -1,0 +1,133 @@
+\doxysection{spell.\+Core.\+Nlp\+Pipeline Class Reference}
+\hypertarget{classspell_1_1_core_1_1_nlp_pipeline}{}\label{classspell_1_1_core_1_1_nlp_pipeline}\index{spell.Core.NlpPipeline@{spell.Core.NlpPipeline}}
+
+
+NLP processing pipeline that chains classification and extraction.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a0ea11d9a5bfcbf47756bf01d98a3f6fe}{Nlp\+Pipeline}} (\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} classifier, \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor}{IEntity\+Extractor}} extractor)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of \doxylink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a301583ea70712d37d6566a4a720a28da}{Handle}} (string input)
+\begin{DoxyCompactList}\small\item\em Processes input through the complete NLP pipeline. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a0c670e8d4d7152f1171dd68655211515}{\+\_\+classifier}}
+\begin{DoxyCompactList}\small\item\em Intent classifier component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor}{IEntity\+Extractor}} \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a7dd1c743c2ef17286ddff3faae301323}{\+\_\+extractor}}
+\begin{DoxyCompactList}\small\item\em Entity extractor component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+NLP processing pipeline that chains classification and extraction. 
+
+Coordinates the two-\/step NLP process\+: first classifies intent, then extracts entities from the input text 
+
+\label{doc-constructors}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_a0ea11d9a5bfcbf47756bf01d98a3f6fe}\index{spell.Core.NlpPipeline@{spell.Core.NlpPipeline}!NlpPipeline@{NlpPipeline}}
+\index{NlpPipeline@{NlpPipeline}!spell.Core.NlpPipeline@{spell.Core.NlpPipeline}}
+\doxysubsubsection{\texorpdfstring{NlpPipeline()}{NlpPipeline()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_nlp_pipeline_a0ea11d9a5bfcbf47756bf01d98a3f6fe} 
+spell.\+Core.\+Nlp\+Pipeline.\+Nlp\+Pipeline (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}}}]{classifier}{, }\item[{\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor}{IEntity\+Extractor}}}]{extractor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of \doxylink{classspell_1_1_core_1_1_nlp_pipeline}{Nlp\+Pipeline}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em classifier} & Intent classifier to use for classification\\
+\hline
+{\em extractor} & Entity extractor to use for extraction\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & Thrown when classifier or extractor is null\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ classifier\ =\ \textcolor{keyword}{new}\ HybridClassifier(keyword,\ semantic);}
+\DoxyCodeLine{var\ extractor\ =\ \textcolor{keyword}{new}\ RecognizersEntityExtractor();}
+\DoxyCodeLine{var\ pipeline\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a0ea11d9a5bfcbf47756bf01d98a3f6fe}{NlpPipeline}}(classifier,\ extractor);}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_a301583ea70712d37d6566a4a720a28da}\index{spell.Core.NlpPipeline@{spell.Core.NlpPipeline}!Handle@{Handle}}
+\index{Handle@{Handle}!spell.Core.NlpPipeline@{spell.Core.NlpPipeline}}
+\doxysubsubsection{\texorpdfstring{Handle()}{Handle()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_nlp_pipeline_a301583ea70712d37d6566a4a720a28da} 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} spell.\+Core.\+Nlp\+Pipeline.\+Handle (\begin{DoxyParamCaption}\item[{string}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Processes input through the complete NLP pipeline. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language command text\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} containing intent, confidence, and extracted entities
+\end{DoxyReturn}
+/// 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ pipeline\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classspell_1_1_core_1_1_nlp_pipeline_a0ea11d9a5bfcbf47756bf01d98a3f6fe}{NlpPipeline}}(classifier,\ extractor);}
+\DoxyCodeLine{var\ result\ =\ pipeline.Handle(\textcolor{stringliteral}{"{}remind\ me\ to\ call\ mom\ tomorrow\ at\ 5pm"{}});}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Intent\ ==\ "{}reminder"{}}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}datetime"{}]\ contains\ parsed\ date/time}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Entities["{}text"{}]\ contains\ the\ reminder\ text}}
+
+\end{DoxyCode}
+ 
+
+Processing steps\+:
+\begin{DoxyEnumerate}
+\item Classify intent using configured classifier
+\item Extract entities using configured extractor
+\item Return populated \doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} 
+\end{DoxyEnumerate}
+
+\label{doc-variable-members}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_a0c670e8d4d7152f1171dd68655211515}\index{spell.Core.NlpPipeline@{spell.Core.NlpPipeline}!\_classifier@{\_classifier}}
+\index{\_classifier@{\_classifier}!spell.Core.NlpPipeline@{spell.Core.NlpPipeline}}
+\doxysubsubsection{\texorpdfstring{\_classifier}{\_classifier}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_nlp_pipeline_a0c670e8d4d7152f1171dd68655211515} 
+\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier}{IIntent\+Classifier}} spell.\+Core.\+Nlp\+Pipeline.\+\_\+classifier\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Intent classifier component. 
+
+\Hypertarget{classspell_1_1_core_1_1_nlp_pipeline_a7dd1c743c2ef17286ddff3faae301323}\index{spell.Core.NlpPipeline@{spell.Core.NlpPipeline}!\_extractor@{\_extractor}}
+\index{\_extractor@{\_extractor}!spell.Core.NlpPipeline@{spell.Core.NlpPipeline}}
+\doxysubsubsection{\texorpdfstring{\_extractor}{\_extractor}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_nlp_pipeline_a7dd1c743c2ef17286ddff3faae301323} 
+\mbox{\hyperlink{interfacespell_1_1_core_1_1_i_entity_extractor}{IEntity\+Extractor}} spell.\+Core.\+Nlp\+Pipeline.\+\_\+extractor\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Entity extractor component. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_nlp_pipeline_8cs}{Nlp\+Pipeline.\+cs}}\end{DoxyCompactItemize}

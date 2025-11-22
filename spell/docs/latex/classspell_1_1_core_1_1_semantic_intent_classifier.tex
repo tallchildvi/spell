@@ -1,0 +1,312 @@
+\doxysection{spell.\+Core.\+Semantic\+Intent\+Classifier Class Reference}
+\hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier}{}\label{classspell_1_1_core_1_1_semantic_intent_classifier}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+Inheritance diagram for spell.\+Core.\+Semantic\+Intent\+Classifier\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classspell_1_1_core_1_1_semantic_intent_classifier}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_aed99361820618bbc5990f2c3c79627a4}{Semantic\+Intent\+Classifier}} (Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ examples)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of \doxylink{classspell_1_1_core_1_1_semantic_intent_classifier}{Semantic\+Intent\+Classifier} with training examples. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_aac9f63ebc422913cb7c0aa35ff7c8098}{Classify}} (string input)
+\begin{DoxyCompactList}\small\item\em Classifies input text using semantic similarity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a2c8728f2a8ca3bdca402ce744903a563}{Acceptance\+Threshold}} = 0.\+55\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Gets or sets the minimum similarity threshold for classification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_ae5ed43724f0cb76c83832d742eea7f89}{Build\+Vocabulary}} ()
+\begin{DoxyCompactList}\small\item\em Builds vocabulary from all training examples. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_af8179d3e7a6104c8e279f5cc27adf857}{Compute\+IDF}} ()
+\begin{DoxyCompactList}\small\item\em Computes IDF (Inverse Document Frequency) scores for vocabulary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a751129e387802b16ac93935df2e53d38}{Build\+Example\+Vectors}} ()
+\begin{DoxyCompactList}\small\item\em Builds TF-\/\+IDF vectors for all training examples. \end{DoxyCompactList}\item 
+double\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a34f52e0bf8eeaa0c3b5639da9d65efc3}{To\+Vector}} (string text)
+\begin{DoxyCompactList}\small\item\em Converts text to TF-\/\+IDF vector representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static double \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a2a8cf751c10c56a1ed22320dc2408e50}{Cosine\+Similarity}} (double\mbox{[}$\,$\mbox{]} a, double\mbox{[}$\,$\mbox{]} b)
+\begin{DoxyCompactList}\small\item\em Computes cosine similarity between two vectors. \end{DoxyCompactList}\item 
+static List$<$ string $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a8e6dfa32a150511421d56b27020e7ac6}{Tokenize}} (string text)
+\begin{DoxyCompactList}\small\item\em Tokenizes text into normalized words. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+readonly Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_ac8a6b62e812b8d6919151e0dc5460915}{\+\_\+examples}}
+\begin{DoxyCompactList}\small\item\em Training examples organized by intent. \end{DoxyCompactList}\item 
+readonly Dictionary$<$ string, List$<$ double\mbox{[}$\,$\mbox{]}$>$ $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a6986ad8e72224dce088e6cacfaffe569}{\+\_\+intent\+Vectors}} = new()
+\begin{DoxyCompactList}\small\item\em Pre-\/computed TF-\/\+IDF vectors for each intent\textquotesingle{}s examples. \end{DoxyCompactList}\item 
+readonly List$<$ string $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_ad1204fbd6a36b5ad2e8f0baf8ad326e6}{\+\_\+vocabulary}} = new()
+\begin{DoxyCompactList}\small\item\em Vocabulary of unique words across all examples. \end{DoxyCompactList}\item 
+readonly Dictionary$<$ string, double $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a0c13b3fc4f584b50a9787c71b86090f8}{\+\_\+idf}} = new()
+\begin{DoxyCompactList}\small\item\em Inverse document frequency scores for each word. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static readonly Hash\+Set$<$ string $>$ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_ae589b5d3fc9dea6a7da48a031d245967}{Stop\+Words}}
+\begin{DoxyCompactList}\small\item\em Common English stop words to filter out during tokenization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_aed99361820618bbc5990f2c3c79627a4}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!SemanticIntentClassifier@{SemanticIntentClassifier}}
+\index{SemanticIntentClassifier@{SemanticIntentClassifier}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{SemanticIntentClassifier()}{SemanticIntentClassifier()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_aed99361820618bbc5990f2c3c79627a4} 
+spell.\+Core.\+Semantic\+Intent\+Classifier.\+Semantic\+Intent\+Classifier (\begin{DoxyParamCaption}\item[{Dictionary$<$ string, string\mbox{[}$\,$\mbox{]}$>$}]{examples}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Initializes a new instance of \doxylink{classspell_1_1_core_1_1_semantic_intent_classifier}{Semantic\+Intent\+Classifier} with training examples. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em examples} & Dictionary of intent names to arrays of example phrases\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & Thrown when examples is null\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ examples\ =\ \textcolor{keyword}{new}\ Dictionary<string,\ string[]>}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ [\textcolor{stringliteral}{"{}reminder"{}}]\ =\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}remind\ me\ to..."{}},\ \textcolor{stringliteral}{"{}set\ a\ reminder..."{}}\ \},}
+\DoxyCodeLine{\ \ \ \ [\textcolor{stringliteral}{"{}timer"{}}]\ =\ \textcolor{keyword}{new}[]\ \{\ \textcolor{stringliteral}{"{}set\ timer\ for..."{}},\ \textcolor{stringliteral}{"{}start\ countdown..."{}}\ \}}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{var\ classifier\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_aed99361820618bbc5990f2c3c79627a4}{SemanticIntentClassifier}}(examples)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classspell_1_1_core_1_1_semantic_intent_classifier_a2c8728f2a8ca3bdca402ce744903a563}{AcceptanceThreshold}}\ =\ 0.6}
+\DoxyCodeLine{\};}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a751129e387802b16ac93935df2e53d38}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!BuildExampleVectors@{BuildExampleVectors}}
+\index{BuildExampleVectors@{BuildExampleVectors}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{BuildExampleVectors()}{BuildExampleVectors()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a751129e387802b16ac93935df2e53d38} 
+void spell.\+Core.\+Semantic\+Intent\+Classifier.\+Build\+Example\+Vectors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Builds TF-\/\+IDF vectors for all training examples. 
+
+Pre-\/computes vectors for fast similarity comparison during classification \Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_ae5ed43724f0cb76c83832d742eea7f89}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!BuildVocabulary@{BuildVocabulary}}
+\index{BuildVocabulary@{BuildVocabulary}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{BuildVocabulary()}{BuildVocabulary()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_ae5ed43724f0cb76c83832d742eea7f89} 
+void spell.\+Core.\+Semantic\+Intent\+Classifier.\+Build\+Vocabulary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Builds vocabulary from all training examples. 
+
+Tokenizes all examples and creates a sorted list of unique words \Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_aac9f63ebc422913cb7c0aa35ff7c8098}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!Classify@{Classify}}
+\index{Classify@{Classify}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{Classify()}{Classify()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_aac9f63ebc422913cb7c0aa35ff7c8098} 
+\mbox{\hyperlink{classspell_1_1_core_1_1_intent_result}{Intent\+Result}} spell.\+Core.\+Semantic\+Intent\+Classifier.\+Classify (\begin{DoxyParamCaption}\item[{string}]{input}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Classifies input text using semantic similarity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & Natural language text to classify\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classspell_1_1_core_1_1_intent_result}{Intent\+Result} with matched intent and similarity score as confidence
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Exception} & Not thrown, handles empty input gracefully\\
+\hline
+\end{DoxyExceptions}
+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{var\ result\ =\ classifier.Classify(\textcolor{stringliteral}{"{}please\ remind\ me\ about\ the\ meeting"{}});}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Intent\ may\ be\ "{}reminder"{}\ if\ similarity\ >\ threshold}}
+\DoxyCodeLine{\textcolor{comment}{//\ result.Confidence\ is\ the\ cosine\ similarity\ score}}
+
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{interfacespell_1_1_core_1_1_i_intent_classifier_a7ac829dd5dbddc7074f8de2f49415eac}{spell.\+Core.\+IIntent\+Classifier}}.
+
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_af8179d3e7a6104c8e279f5cc27adf857}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!ComputeIDF@{ComputeIDF}}
+\index{ComputeIDF@{ComputeIDF}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{ComputeIDF()}{ComputeIDF()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_af8179d3e7a6104c8e279f5cc27adf857} 
+void spell.\+Core.\+Semantic\+Intent\+Classifier.\+Compute\+IDF (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Computes IDF (Inverse Document Frequency) scores for vocabulary. 
+
+Uses formula\+: log((1 + doc\+Count) / (1 + document\+Frequency)) + 1 Higher scores for rarer words across documents \Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a2a8cf751c10c56a1ed22320dc2408e50}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!CosineSimilarity@{CosineSimilarity}}
+\index{CosineSimilarity@{CosineSimilarity}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{CosineSimilarity()}{CosineSimilarity()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a2a8cf751c10c56a1ed22320dc2408e50} 
+double spell.\+Core.\+Semantic\+Intent\+Classifier.\+Cosine\+Similarity (\begin{DoxyParamCaption}\item[{double\mbox{[}$\,$\mbox{]}}]{a}{, }\item[{double\mbox{[}$\,$\mbox{]}}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Computes cosine similarity between two vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First vector\\
+\hline
+{\em b} & Second vector\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Similarity score between 0.\+0 and 1.\+0
+\end{DoxyReturn}
+
+
+Formula\+: dot(a, b) / (magnitude(a) \texorpdfstring{$\ast$}{*} magnitude(b)) Returns 0 if either vector has zero magnitude \Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a8e6dfa32a150511421d56b27020e7ac6}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!Tokenize@{Tokenize}}
+\index{Tokenize@{Tokenize}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{Tokenize()}{Tokenize()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a8e6dfa32a150511421d56b27020e7ac6} 
+List$<$ string $>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+Tokenize (\begin{DoxyParamCaption}\item[{string}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Tokenizes text into normalized words. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Text to tokenize\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of lowercase words with stop words and short words removed
+\end{DoxyReturn}
+
+
+Process\+: lowercase → remove punctuation → split → filter stop words and single chars \Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a34f52e0bf8eeaa0c3b5639da9d65efc3}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!ToVector@{ToVector}}
+\index{ToVector@{ToVector}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{ToVector()}{ToVector()}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a34f52e0bf8eeaa0c3b5639da9d65efc3} 
+double\mbox{[}$\,$\mbox{]} spell.\+Core.\+Semantic\+Intent\+Classifier.\+To\+Vector (\begin{DoxyParamCaption}\item[{string}]{text}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Converts text to TF-\/\+IDF vector representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & Text to vectorize\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+TF-\/\+IDF vector with dimension equal to vocabulary size
+\end{DoxyReturn}
+
+
+TF (Term Frequency) = word\+\_\+count / total\+\_\+words TF-\/\+IDF = TF \texorpdfstring{$\ast$}{*} IDF 
+
+\label{doc-variable-members}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_ac8a6b62e812b8d6919151e0dc5460915}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!\_examples@{\_examples}}
+\index{\_examples@{\_examples}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{\_examples}{\_examples}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_ac8a6b62e812b8d6919151e0dc5460915} 
+readonly Dictionary$<$string, string\mbox{[}$\,$\mbox{]}$>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+\_\+examples\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Training examples organized by intent. 
+
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a0c13b3fc4f584b50a9787c71b86090f8}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!\_idf@{\_idf}}
+\index{\_idf@{\_idf}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{\_idf}{\_idf}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a0c13b3fc4f584b50a9787c71b86090f8} 
+readonly Dictionary$<$string, double$>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+\_\+idf = new()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Inverse document frequency scores for each word. 
+
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a6986ad8e72224dce088e6cacfaffe569}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!\_intentVectors@{\_intentVectors}}
+\index{\_intentVectors@{\_intentVectors}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{\_intentVectors}{\_intentVectors}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a6986ad8e72224dce088e6cacfaffe569} 
+readonly Dictionary$<$string, List$<$double\mbox{[}$\,$\mbox{]}$>$ $>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+\_\+intent\+Vectors = new()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Pre-\/computed TF-\/\+IDF vectors for each intent\textquotesingle{}s examples. 
+
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_ad1204fbd6a36b5ad2e8f0baf8ad326e6}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!\_vocabulary@{\_vocabulary}}
+\index{\_vocabulary@{\_vocabulary}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{\_vocabulary}{\_vocabulary}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_ad1204fbd6a36b5ad2e8f0baf8ad326e6} 
+readonly List$<$string$>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+\_\+vocabulary = new()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Vocabulary of unique words across all examples. 
+
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_ae589b5d3fc9dea6a7da48a031d245967}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!StopWords@{StopWords}}
+\index{StopWords@{StopWords}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{StopWords}{StopWords}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_ae589b5d3fc9dea6a7da48a031d245967} 
+readonly Hash\+Set$<$string$>$ spell.\+Core.\+Semantic\+Intent\+Classifier.\+Stop\+Words\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{keyword}{new}()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}the"{}},\ \textcolor{stringliteral}{"{}a"{}},\ \textcolor{stringliteral}{"{}to"{}},\ \textcolor{stringliteral}{"{}for"{}},\ \textcolor{stringliteral}{"{}at"{}},\ \textcolor{stringliteral}{"{}be"{}},\ \textcolor{stringliteral}{"{}on"{}},\ \textcolor{stringliteral}{"{}of"{}},\ \textcolor{stringliteral}{"{}in"{}},\ \textcolor{stringliteral}{"{}me"{}},\ \textcolor{stringliteral}{"{}my"{}},\ \textcolor{stringliteral}{"{}is"{}},\ \textcolor{stringliteral}{"{}am"{}},\ \textcolor{stringliteral}{"{}are"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Common English stop words to filter out during tokenization. 
+
+
+
+\label{doc-property-members}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{classspell_1_1_core_1_1_semantic_intent_classifier_a2c8728f2a8ca3bdca402ce744903a563}\index{spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}!AcceptanceThreshold@{AcceptanceThreshold}}
+\index{AcceptanceThreshold@{AcceptanceThreshold}!spell.Core.SemanticIntentClassifier@{spell.Core.SemanticIntentClassifier}}
+\doxysubsubsection{\texorpdfstring{AcceptanceThreshold}{AcceptanceThreshold}}
+{\footnotesize\ttfamily \label{classspell_1_1_core_1_1_semantic_intent_classifier_a2c8728f2a8ca3bdca402ce744903a563} 
+double spell.\+Core.\+Semantic\+Intent\+Classifier.\+Acceptance\+Threshold = 0.\+55\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [set]}}
+
+
+
+Gets or sets the minimum similarity threshold for classification. 
+
+Threshold value between 0.\+0 and 1.\+0, defaults to 0.\+55
+
+Results below this threshold are classified as "{}unknown"{} 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Core/\mbox{\hyperlink{_semantic_intent_classifier_8cs}{Semantic\+Intent\+Classifier.\+cs}}\end{DoxyCompactItemize}
